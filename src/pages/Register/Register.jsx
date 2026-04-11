@@ -1,14 +1,24 @@
 import styles from "./Register.module.css"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export const Register = () => {
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('El formulario fue enviado')
+    navigate('/login')
+  }
+
+
   return (
     <>
-      <div className={styles.background}>
+      <div className="background">
         <div className={styles.contentRegister}>
           <div className={styles.formRegister}>
 
-            <form action="" method="POST" >
+            <form action="" onSubmit={handleSubmit} >
               <h1 className={styles.title}>Regístrate</h1>
 
               <div className={styles.displayForm}>
@@ -64,7 +74,7 @@ export const Register = () => {
               <p className={styles.spanStyle}>¿Ya tienes cuenta? <span><Link to="/" className={styles.link}>Iniciar Sesión</Link></span></p>
               <p className={styles.spanStyle}><Link to="/" className={styles.link}>Olvidé mi contraseña</Link></p>
             </div>
-            
+
           </div>
         </div>
       </div>

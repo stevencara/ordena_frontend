@@ -3,12 +3,15 @@ import { UserItem } from './UserItem/UserItem'
 import styles from './CreateUser.module.css'
 
 export const CreateUser = () => {
+
+
+  
   return (
-    <div className={styles.background}>
-      <div className={styles.container}>
+    <div className="background">
+      <div className="container">
         <h1>Usuarios</h1>
 
-        <form action="" className={styles.formFlex}>
+        <form action="" className="formFlex">
           <label htmlFor="order-id">
             <input type="number" id="order-id" className={styles.inputTable} />
           </label>
@@ -25,9 +28,9 @@ export const CreateUser = () => {
           <li><ButtonAddUser /></li>
         </ul>
 
-        <div className={styles.contentFlex}>
+        <div className="contentFlex">
           {/* Modulo Formulario Nuevo Pedido*/}
-          <div className={styles.module}>
+          <div className="module">
             <UserItem />
             <UserItem />
             <UserItem />
@@ -41,7 +44,7 @@ export const CreateUser = () => {
           </div>
 
           {/* Modulo Formulario Nuevo Pedido*/}
-          <div className={styles.module}>
+          <div className="module">
             <form action="" >
 
               <h2>Usuario</h2>

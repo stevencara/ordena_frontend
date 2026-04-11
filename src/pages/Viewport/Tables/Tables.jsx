@@ -4,7 +4,7 @@ import styles from './Tables.module.css';
 export const Tables = () => {
   return (
     <div>
-      <form action="" className={styles.formFlex}>
+      <form action="" className="formFlex">
         <label htmlFor="table-id">N° de mesa
           <input type="number" id="table-id" className={styles.inputTable} />
         </label>

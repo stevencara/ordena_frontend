@@ -6,19 +6,21 @@ import { CreateOrder } from "./pages/CreateOrder/CreateOrder"
 import { CreateUser } from "./pages/CreateUser/CreateUser"
 import { Menu } from "./pages/Menu/Menu"
 import { ViewOrders } from "./pages/ViewOrders/ViewOrders"
+import { Index } from "./pages/Index/Index"
 
 function App() {
-  
+
   return (
-    <Routes>
-      <Route path="/login" element={<Login/>} />
-      <Route path="/register" element={<Register/>} />
-      <Route path="/" element={<Viewport/>} />
-      <Route path="/create-order" element={<CreateOrder/>} />
-      <Route path="/create-user" element={<CreateUser/>} />
-      <Route path="/menu" element={<Menu/>} />
-      <Route path="/view-orders" element={<ViewOrders/>} />
-    </Routes>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Viewport />} />
+        <Route path="/create-order" element={<CreateOrder />} />
+        <Route path="/create-user" element={<CreateUser />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/view-orders" element={<ViewOrders />} />
+      </Routes>
   )
 }
 

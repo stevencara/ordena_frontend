@@ -5,10 +5,9 @@
   display: flex;
   flex-direction: row;
   justify-content: end;
-  gap: 10px;
   width: 100%;
-  height: 35px;
-  position: sticky;
+  height: 50px;
+  position: fixed;
   top: 0;
   z-index: 10;
 }
@@ -21,10 +20,10 @@ li{
   color: white;
   font-size: 0.8rem;
   cursor: pointer;
-  width: 151px;
-  height: 35px;
+  /*width: 151px; */
+  height: 100%;
   border-radius: 5px;
-  background-color:  rgb(89, 34, 14 );
+
 }
 
 li:hover{

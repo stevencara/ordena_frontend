@@ -5,16 +5,16 @@ import { ButtonAdd, ButtonBack } from '../../components/Button/Button'
 
 export const CreateOrder = () => {
   return (
-    <div className={styles.background}>
-      <div className={styles.container}>
+    <div className="background">
+      <div className="container">
         <h1>Creá un pedido</h1>
 
-        <div className={styles.contentFlex}>
+        <div className="contentFlex">
 
           {/* Modulo Formulario Nuevo Pedido*/}
-          <div className={styles.module}>
+          <div className="module">
             <form action="" >
-              <div className={styles.formFlex}>
+              <div className="formFlex">
                 <label htmlFor="table-id">N° de mesa
                   <input type="number" id="table-id" className={styles.inputTable} />
                 </label>
@@ -63,7 +63,7 @@ export const CreateOrder = () => {
           </div>
 
           {/* Modulo Detalle Pedido*/}
-          <div className={styles.module}>
+          <div className="module">
             <CardOrder />
           </div>
 

@@ -1,10 +1,4 @@
 
-.formFlex {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-}
-
 .inputTable {
   background-color: rgb(30, 25, 25);
   color: white;

@@ -41,10 +41,53 @@ h4{
   margin-bottom: 3px;
 }
 
-
-
 label{
   color: white;
   font-size: 0.7rem;
   font-weight: bold;
+}
+
+.background {
+  width: 100%;
+  min-height: 100vh;
+  background: url("./assets/background.jpg");
+  background-size: cover;
+  padding-top: 4%;
+}
+
+.container{
+  background-color: black;
+  opacity: 0.90;
+  margin: 0 15% 0 15%;
+  padding: 30px 6% 4% 6%;
+  border-radius: 20px;
+}
+
+.contentFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+}
+
+
+.module {
+  width: 50%;
+  height: 80vh;
+  border: 1px solid black;
+  background-color: black;
+  opacity: 0.90;
+  border-radius: 10px;
+  padding: 4% 0% 4% 0%;
+  margin: 0 0 0 0;
+  border: 1px solid white;
+  overflow: scroll;
+}
+
+
+.formFlex {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: end;
 }

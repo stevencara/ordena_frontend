@@ -4,20 +4,20 @@ import styles from './Viewport.module.css'
 
 export const Viewport = () => {
   return (
-    <div className={styles.background}>
+    <div className="background">
 
-      <div className={styles.container}>
+      <div className="container">
         <h1>Mesas</h1>
-        <div className={styles.contentFlex}>
+        <div className="contentFlex">
 
           {/* Modulo mesas*/}
-          <div className={styles.module}>
+          <div className="module">
             <Tables />
           </div>
 
           {/* Modulo pedidos asociados a mesa*/}
-          <div className={styles.module}>
-            <form action="" className={styles.formFlex}>
+          <div className="module">
+            <form action="" className="formFlex">
               <label htmlFor="filter-orders">Filtrar por:
                 <select name="" id="filter-orders" className={styles.inputTable}>
                   <option value="">Más reciente</option>
