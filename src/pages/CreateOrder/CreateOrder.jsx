@@ -1,5 +1,5 @@
 import styles from './CreateOrder.module.css'
-import { CardOrder } from '../Viewport/CardOrder/CardOrder'
+import { CardOrder } from '../Dashboard/CardOrder/CardOrder'
 import { Link } from "react-router-dom"
 import { ButtonAdd, ButtonBack } from '../../components/Button/Button'
 

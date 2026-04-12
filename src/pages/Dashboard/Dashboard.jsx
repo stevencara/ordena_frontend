@@ -1,8 +1,8 @@
 import { CardOrder } from './CardOrder/CardOrder'
 import { Tables } from './Tables/Tables'
-import styles from './Viewport.module.css'
+import styles from './Dashboard.module.css'
 
-export const Viewport = () => {
+export const Dashboard = () => {
   return (
     <div className="background">
 

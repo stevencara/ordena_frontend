@@ -1,11 +1,33 @@
 import { ButtonAdd, ButtonAddUser, ButtonBack, ButtonDelete } from '../../components/Button/Button'
 import { UserItem } from './UserItem/UserItem'
 import styles from './CreateUser.module.css'
+import { useEffect, useState } from 'react'
 
 export const CreateUser = () => {
+  const [users, setUsers] = useState([]);
+
+  const [filter, setFilter] = useState("Todos")
+
+  useEffect(() => {
+    fetch('/api/users.json')
+      .then(response => response.json())
+      .then(result => {
+        setUsers(result)
+      })
+      .catch(error => console.log("Error cargando archivo: ", error))
+  }, [])
 
 
-  
+  const handleSelectChange = (e) => {
+    setFilter(e.target.value)
+  }
+
+  const usersFiltered = users.filter((user) => {
+    if (filter === "" || filter === "Todos") return true;
+    return user.role === filter;
+  })
+
+
   return (
     <div className="background">
       <div className="container">
@@ -13,34 +35,26 @@ export const CreateUser = () => {
 
         <form action="" className="formFlex">
           <label htmlFor="order-id">
-            <input type="number" id="order-id" className={styles.inputTable} />
+            <input type="text" id="order-id" className={styles.inputTable} />
           </label>
           <div className={styles.divSearch}>
             <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
           </div>
+          <label htmlFor="filter-orders">Filtrar por:
+            <select name="" id="filter-orders" className={styles.inputTable} onChange={handleSelectChange}>
+              <option value="Todos"  >Todos</option>
+              <option value="Mesero" >Meseros</option>
+              <option value="Cocinero" >Cocineros</option>
+              <option value="Administrador" >Administradores</option>
+              <option value="Cliente" >Clientes</option>
+            </select>
+          </label>
         </form>
-
-        <ul className={styles.menuUsers}>
-          <li>Todos</li>
-          <li>Meseros</li>
-          <li>Cocineros</li>
-          <li>Administradores</li>
-          <li><ButtonAddUser /></li>
-        </ul>
 
         <div className="contentFlex">
           {/* Modulo Formulario Nuevo Pedido*/}
           <div className="module">
-            <UserItem />
-            <UserItem />
-            <UserItem />
-            <UserItem />
-            <UserItem />
-            <UserItem />
-            <UserItem />
-            <UserItem />
-            <UserItem />
-            <UserItem />
+            <UserItem users={usersFiltered} />
           </div>
 
           {/* Modulo Formulario Nuevo Pedido*/}

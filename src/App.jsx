@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom"
 import { Login } from "./pages/Login/Login"
 import { Register } from "./pages/Register/Register"
-import { Viewport } from "./pages/Viewport/Viewport"
+import { Dashboard } from "./pages/Dashboard/Dashboard"
 import { CreateOrder } from "./pages/CreateOrder/CreateOrder"
 import { CreateUser } from "./pages/CreateUser/CreateUser"
 import { Menu } from "./pages/Menu/Menu"
@@ -15,7 +15,7 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Viewport />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create-order" element={<CreateOrder />} />
         <Route path="/create-user" element={<CreateUser />} />
         <Route path="/menu" element={<Menu />} />

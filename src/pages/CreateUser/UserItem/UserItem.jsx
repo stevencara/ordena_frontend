@@ -1,10 +1,16 @@
 import styles from './UserItem.module.css'
 
-export const UserItem = () => {
+
+export const UserItem = ({users}) => {
+
   return (
-    <div className={styles.userItem}>
-      <h4 className={styles.userItemTitle}>Mario José Forero Díaz</h4>
-      <p className={styles.userItemName}>Operativo</p>
-    </div>
+    <>
+      {users.map((user) => (
+        <div className={styles.userItem} key={user.id}>
+          <h4 className={styles.userItemTitle}>{`${user.name} ${user.lastname}`}</h4>
+          <p className={styles.userItemName}>{user.role}</p>
+        </div>
+      ))}
+    </>
   )
 }

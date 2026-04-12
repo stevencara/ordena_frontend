@@ -40,10 +40,3 @@
   flex-direction: row;
   gap: 7px;
 }
-
-.menuUsers{
-  display: flex;
-  flex-direction: row;
-  margin-left: 7%;
-  
-}

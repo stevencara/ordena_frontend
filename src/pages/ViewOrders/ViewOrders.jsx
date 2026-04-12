@@ -1,5 +1,5 @@
-import { CardOrder } from '../Viewport/CardOrder/CardOrder'
-import { Tables } from '../Viewport/Tables/Tables'
+import { CardOrder } from '../Dashboard/CardOrder/CardOrder'
+import { Tables } from '../Dashboard/Tables/Tables'
 import { OrderItem } from './OrderItem/OrderItem'
 import styles from './ViewOrders.module.css'
 

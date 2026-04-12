@@ -1,8 +1,31 @@
 import { ButtonAdd, ButtonAddUser, ButtonDelete } from '../../components/Button/Button'
 import styles from './Menu.module.css'
 import { ProductItem } from './ProductItem/ProductItem'
+import { useEffect, useState } from 'react'
 
 export const Menu = () => {
+  const [products, setProducts] = useState([])
+  const [filter, setFilter] = useState("Todos")
+
+  useEffect(() => {
+    fetch('/api/products.json')
+      .then(response => response.json())
+      .then(result => {
+        setProducts(result)
+      })
+      .catch(error => console.error("Error cargando el archivo: ", error))
+  }, [])
+
+
+  const handleInputChange = (e) => {
+    setFilter(e.target.value)
+  }
+
+  const productsFiltered = products.filter((product) => {
+    if (filter === "" || filter === "Todos") return true;
+    return product.category === filter
+  })
+
   return (
     <div className="background">
       <div className="container">
@@ -15,27 +38,31 @@ export const Menu = () => {
           <div className={styles.divSearch}>
             <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
           </div>
+          <label htmlFor="food-type">Tipo
+            <select id="food-type" className={styles.inputTable} onChange={handleInputChange}>
+              <option value="Todos">Todos</option>
+              <option value="Hamburguesas">Hamburguesas</option>
+              <option value="Pizzas">Pizzas</option>
+              <option value="Ensaladas">Ensaladas</option>
+              <option value="Mexicana">Mexicana</option>
+              <option value="Japonesa">Japonesa</option>
+              <option value="Pastas">Pastas</option>
+              <option value="Bebidas">Bebidas</option>
+              <option value="Saludable">Saludable</option>
+              <option value="Carnes">Carnes</option>
+              <option value="Postres">Postres</option>
+              <option value="Niños">Niños</option>
+              <option value="Acompañamientos">Acompañamientos</option>
+              <option value="Entradas">Entradas</option>
+              <option value="Internacional">Internacional</option>
+            </select>
+          </label>
         </form>
-
-        <ul className={styles.menuUsers}>
-          <li>Sopas</li>
-          <li>Fast food</li>
-          <li>Bebidas</li>
-          <li>Postres</li>
-          <li>Italiana</li>
-          <li>Entradas</li>
-          <li>Mexicana</li>
-          <li>Ensaladas</li>
-          <li>Vinos</li>
-          <li><ButtonAddUser /></li>
-        </ul>
 
         <div className="contentFlex">
           {/* Modulo Formulario Nuevo Platillo*/}
           <div className="module">
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
+            <ProductItem products={productsFiltered} />
           </div>
 
           {/* Modulo Formulario Nuevo Platillo*/}
