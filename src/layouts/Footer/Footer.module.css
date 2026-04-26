@@ -4,20 +4,24 @@
   width: 100%;
   background-color: rgb(32, 32, 32);
   color: white;
-  padding: 30px 10%;
+  padding-top: 30px;
+  padding-bottom: 30px;
   width: 100%;
   padding-top: 15px;
-  padding-bottom: 15px;
   position: static;
   bottom: 0;
   text-align: center;
   font-size: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .footerContain{
   width: 1000px;
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .footerContainDiv{

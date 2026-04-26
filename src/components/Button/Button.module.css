@@ -50,3 +50,15 @@
   color: white;
   border: 1px solid black;
 }
+
+.btnLink {
+  background-color: rgb(255, 174, 0);
+  color: black;
+  border: 1px solid black;
+  margin-top: 10px;
+  width: 200px;
+  padding: 20px;
+  font-size: 18px;
+  border: transparent;
+  font-weight: 700;
+}

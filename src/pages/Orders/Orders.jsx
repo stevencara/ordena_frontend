@@ -103,7 +103,7 @@ export const Orders = () => {
 
 
                 <div className={styles.divActionsOrder}>
-                  <Button className="btnBack" text="Atrás" />
+                  <Button text="Atrás" className="btnBack" />
                   <Button text='Añadir' className='btnAdd' />
                 </div>
 
