@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: end;
-  width: 100%;
+  width: 100vw;
   height: 50px;
   background-color:  rgb(217, 101, 35 );
   padding: 3px;

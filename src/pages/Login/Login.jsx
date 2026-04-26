@@ -3,9 +3,12 @@ import styles from "./Login.module.css"
 import { Link, useNavigate } from "react-router-dom"
 import { Input } from "../../components/Input/Input";
 import { Button } from "../../components/Button/Button";
+import { Loader } from "../../components/Loader/Loader";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false)
+
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -18,12 +21,20 @@ export const Login = () => {
       [name]: value
     }))
   }
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.email.includes('@')) {
+      alert("Debes ingresar un correo válido")
+      return
+    }
+    setLoading(true)
     console.log('El formulario fue enviado:', formData)
-
-    navigate('/dashboard')
+    setTimeout(() => {
+      setLoading(false);
+      navigate('/dashboard')
+    }, 3000);
   }
 
   return (
@@ -32,40 +43,46 @@ export const Login = () => {
         <div className={styles.contentLogin}>
           <div className={styles.formLogin}>
 
-            <form action="" onSubmit={handleSubmit}>
-              <h1>Iniciar Sesión</h1>
-              <Input
-                label="Correo Electrónico"
-                name="email"
-                type="email"
-                placeholder = "henan.c@gmail.com"
-                className="inputPrimary"
-                required
-                value={formData.email}
-                onChange={handleChange}
-              />
+            <h1>Iniciar Sesión</h1>
+            <fieldset>
+              <legend></legend>
+              <form action="" onSubmit={handleSubmit}>
+                <Input
+                  label="Correo Electrónico"
+                  name="email"
+                  type="email"
+                  placeholder="henan.c@gmail.com"
+                  className="inputPrimary"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                />
 
-              <Input
-                label="Contraseña"
-                name="password"
-                type="password"
-                placeholder = "**************"
-                className="inputPrimary"
-                required
-                value={formData.password}
-                onChange={handleChange}
-              />
+                <Input
+                  label="Contraseña"
+                  name="password"
+                  type="password"
+                  placeholder="**************"
+                  className="inputPrimary"
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                />
 
-              <Button text="Ingresar" type="submit" className="btnLogin" />
-            </form>
+                <Button text="Ingresar" type="submit" className="btnLogin" />
+                {loading && <Loader />}
+              </form>
+            </fieldset>
 
             <div className={styles.countOptions}>
               <p className={styles.paragragh}><Link to="/" className={styles.link}>Olvide mi contraseña</Link></p>
-              <p className={styles.paragragh}>¿No tienes cuenta? <span><Link to="/register" className={styles.link}>Registrate</Link></span></p>
+              <p className={styles.paragragh}>¿No tienes cuenta? <span><Link to="/register" className={styles.link}>Regístrate</Link></span></p>
             </div>
+
 
           </div>
         </div>
+
       </div>
     </>
   )

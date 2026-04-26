@@ -1,6 +1,7 @@
+import { forwardRef } from 'react'
 import styles from './Input.module.css'
 
-export const Input = ({
+export const Input = forwardRef(({
   label = "",
   type,
   className,
@@ -11,7 +12,7 @@ export const Input = ({
   max="",
   onChange,
   variant = "dark"
-}) => {
+}, ref) => {
 
   const labelStyle = variant === "dark" ? styles.labelLight : styles.labelDark;
 
@@ -19,19 +20,20 @@ export const Input = ({
     <div className={styles.inputContainer}>
       <label className={`${styles.labelBase} ${labelStyle}`} >{label}
         <input
+          ref={ref}
           type={type}
           placeholder={placeholder}
           className={`${styles.input} ${styles[className]}`}
           name={name}
           min={min}
           max={max}
-          value={value}
+          value={value || ""}
           onChange={onChange}
         />
       </label>
     </div>
   )
-}
+})
 
 export const InputSelect = ({
   label = "Tipo",
@@ -46,7 +48,7 @@ export const InputSelect = ({
   const labelStyle = variant === "dark" ? styles.labelLight : styles.labelDark
 
   return (
-    <div>
+    <div className={styles.inputContainer}>
       <label className={`${styles.labelBase} ${labelStyle}`} >{label}
         <select
            className={`${styles.input} ${styles[className]}`}

@@ -35,7 +35,6 @@
   background-color: rgb(191, 90, 18);
   color: black;
   border: 1px solid black;
-  border: 1px solid black;
 }
 
 .btnDelete {
@@ -45,10 +44,11 @@
 }
 
 .btnLogin,
-.btnRegister {
+.btnRegister,
+.btnSignOut {
   background-color: rgb(217, 101, 35);
   color: white;
-  border: 1px solid black;
+
 }
 
 .btnLink {

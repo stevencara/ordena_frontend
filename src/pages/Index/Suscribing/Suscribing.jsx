@@ -2,9 +2,10 @@ import { useState } from "react"
 import styles from "./Suscribing.module.css"
 import { Input } from "../../../components/Input/Input"
 import { Button } from "../../../components/Button/Button"
-
+import { Loader } from "../../../components/Loader/Loader"
 export const Suscribing = () => {
   const [formData, setFormData] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -18,6 +19,12 @@ export const Suscribing = () => {
       alert("Debes ingresar un correo válido")
       return
     }
+    setLoading(true)
+
+    setTimeout(() => {
+      setLoading(false)
+    }, [3000])
+
     console.log(formData)
     setFormData("")
   }
@@ -28,18 +35,22 @@ export const Suscribing = () => {
       <p className={styles.suscriptionParagraph}>Recibe noticias, promociones especiales y nuevos platos directamente en tu correo. Sé el primero en enterarte de nuestras novedades y disfruta beneficios exclusivos.</p>
       <div className={styles.formText}>
         <form onSubmit={handleSubmit} >
-          <Input
-            label="Correo"
-            type="text"
-            className="labelBase"
-            placeholder=""
-            name="email"
-            value={formData}
-            onChange={(e) => setFormData(e.target.value)}
-            variant="Light"
-          />
-          <Button text="Enviar" className="btnLink" type="submit" />
+          <fieldset>
+            <legend></legend>
+            <Input
+              label="Correo"
+              type="text"
+              className="labelBase"
+              placeholder=""
+              name="email"
+              value={formData}
+              onChange={(e) => setFormData(e.target.value)}
+              variant="Light"
+            />
+            <Button text="Suscribirse" className="btnLink" type="submit" />
+          </fieldset>
         </form>
+        {loading && <Loader />}
       </div>
     </section>
   )

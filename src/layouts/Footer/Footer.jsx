@@ -24,9 +24,11 @@ export const Footer = () => {
 
         <article className={styles.footerContainDiv}>
           <h3>Contacto</h3>
-          <p>Tel: +57 300 123 4567<br />
-            Email: contacto@avenidalaspalmas.com<br />
-            Calle 90 #11-20 Chapinero, Bogotá, Colombia</p>
+
+          <p><i className="fa-solid fa-phone" style={{ color: 'rgb(255, 255, 255)' }}></i> 300 123 4567</p>
+          <p><i className="fa-solid fa-envelope" style={{ color: 'rgb(255, 255, 255)' }}></i> contacto@avenidalaspalmas.com</p>
+          <p><i className="fa-solid fa-location-dot" style={{ color: 'rgb(255, 255, 255)' }}></i> Calle 90 #11-20 Chapinero, Bogotá, Colombia
+          </p>
         </article>
       </section>
 
@@ -35,7 +37,6 @@ export const Footer = () => {
         <i className={`fa-brands fa-instagram ${styles.icon}`}></i>
         <i className={`fa-brands fa-youtube ${styles.icon}`}></i>
         <p>2026 | Todos los Derechos Reservados ®</p>
-        <p>Calle 26 #69d-34 Bogotá, Colombia</p>
       </section>
 
     </footer>

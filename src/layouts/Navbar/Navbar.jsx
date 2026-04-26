@@ -17,7 +17,7 @@ export const Navbar = () => {
         <div style={{ height: "100%", width: "50%" }}>
           <ul className={styles.menuIndex}>
             <div style={{display:"flex", justifyContent: "center", alignItems:"center"}}><img src={logo} alt="logo" className={styles.logo} onClick={handleClick} /></div>
-            <Link to="/"><li className={styles.navItem}>Inicio</li></Link>
+            <Link to="/"><li className={styles.navItem} aria-current="page" >Inicio</li></Link>
           </ul>
         </div>
         <div style={{ height: "100%", width: "50%" }}>

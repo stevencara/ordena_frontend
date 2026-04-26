@@ -17,45 +17,49 @@ export const Tables = () => {
 
   return (
     <div>
-      <form action="" className="formFlex">
+      <form>
+        <fieldset className="formFlex">
+          <legend></legend>
+          <Input
+            label="N° de mesa"
+            type="number"
+            className="inputPrimary"
+            placeholder=""
+            name=""
+            value=""
+            onChange={() => { }}
+            required
+            variant='dark'
+          />
 
-        <Input
-          label="N° de mesa"
-          type="number"
-          className="inputPrimary"
-          placeholder=""
-          name=""
-          value=""
-          onChange={() => { }}
-          required
-          variant='dark'
-        />
+          <Input
+            label="N° de pedido"
+            type="number"
+            className="inputPrimary"
+            placeholder=""
+            name=""
+            value=""
+            onChange={() => { }}
+            required
+            variant='dark'
+          />
 
-        <Input
-          label="N° de pedido"
-          type="number"
-          className="inputPrimary"
-          placeholder=""
-          name=""
-          value=""
-          onChange={() => { }}
-          required
-          variant='dark'
-        />
+          <div className={styles.divSearch}>
+            <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
+          </div>
 
-        <div className={styles.divSearch}>
-          <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
-        </div>
+        </fieldset>
 
       </form>
 
       <div className={styles.gridTables}>
         {tables.map((table) => (
-          <div 
+          <div
             key={table.number}
-            className={`${styles.tableItem} ${ selectedTable === table.number ? styles.classOrange : styles.classWhite }`}
-            onClick={() => {setSelectedTable(table.number)
-            } } >{table.number}</div>
+            className={`${styles.tableItem} ${selectedTable === table.number ? styles.classOrange : styles.classWhite}`}
+            onClick={() => {
+              setSelectedTable(table.number)
+            }} >{table.number}</div>
         ))}
       </div>
     </div>

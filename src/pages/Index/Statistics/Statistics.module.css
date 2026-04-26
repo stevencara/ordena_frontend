@@ -1,9 +1,16 @@
 /* ESTILOS SECCION RESEÑAS */
+.title2 {
+  font-family: "Pacifico", cursive;
+  font-size: 50px;
+  text-align: center;
+  margin: 20px 0;
+}
 
 .dates {
     background-color: rgb(41, 41, 41);
     width: 100%;
     height: auto;
+    margin: 0 0 100px;
     padding: 0 10%;
     padding-bottom: 50px;
     display: flex;

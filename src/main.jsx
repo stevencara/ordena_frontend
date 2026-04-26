@@ -7,8 +7,8 @@ import { Footer } from './layouts/Footer/Footer.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <Navbar/>
-      <App  />
+    <Navbar />
+    <App />
 
   </BrowserRouter>
 )

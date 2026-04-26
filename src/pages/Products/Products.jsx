@@ -3,11 +3,19 @@ import styles from './Products.module.css'
 import { ProductItem } from './ProductItem/ProductItem'
 import { useEffect, useState } from 'react'
 import { Input, InputSelect } from '../../components/Input/Input'
+import { Loader } from '../../components/Loader/Loader'
 
 export const Products = () => {
   const [products, setProducts] = useState([])
   const [plateType, setPlateType] = useState("Todos")
-
+  const [loading, setLoading] = useState(false)
+  const [formData, setFormData] = useState({
+    name: "",
+    typeProduct: "",
+    price: 0,
+    description: "",
+    file: ""
+  })
   const PLATES_TYPE = ["Todos", "Hamburguesas", "Pizzas", "Ensaladas", "Mexicana", "Japonesa", "Pastas", "Bebidas", "Saludable", "Carnes", "Postres", "Niños", "Acompañamientos", "Entradas", "Internacional"]
 
   useEffect(() => {
@@ -19,41 +27,85 @@ export const Products = () => {
       .catch(error => console.error("Error cargando el archivo: ", error))
   }, [])
 
-
   const productsFiltered = products.filter((product) => {
     if (plateType === "" || plateType === "Todos") return true;
     return product.category === plateType
   })
+
+  // CAPTURAR DATOS DE FORMULARIO CREACION DE USUARIO
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target
+
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }))
+  }
+
+
+  // ENVIAR DATOS DE FORMULARIO CREACION DE PRODUCTO
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.typeProduct === "") {
+      alert("Selecione un tipo de producto")
+      return
+    }
+    const emptyFields = Object.entries(formData).some(([key, value]) => value === "")
+    if (emptyFields) {
+      alert("Hay campos vacíos")
+      return
+    }
+    console.log(`El formulario enviado es: `, formData)
+    setLoading(true)
+
+    setFormData({
+      name: "",
+      typeProduct: "",
+      price: 0,
+      description: "",
+      file: ""
+    })
+
+    setTimeout(() => {
+      setLoading(false)
+    }, 3000)
+
+  }
 
   return (
     <div className="background">
       <div className="container">
         <h1>Menú</h1>
 
-        <form action="" className="formFlex">
-          <Input
-            label="Buscar"
-            type="text"
-            className="inputPrimary"
-            placeholder=""
-            name=""
-            value=""
-            onChange={() =>{}}
-            variant='dark'
-          />
+        <form >
+          <fieldset className="formFlex">
+            <legend></legend>
+            <Input
+              label="Buscar"
+              type="text"
+              className="inputPrimary"
+              placeholder=""
+              name=""
+              value=""
+              onChange={() => { }}
+              variant='dark'
+            />
 
-          <div className={styles.divSearch}>
-            <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
-          </div>
+            <div className={styles.divSearch}>
+              <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
+            </div>
 
-          <InputSelect
-            label="Tipo de comida"
-            type="text"
-            className="inputPrimary"
-            placeholder=""
-            onChange={(e) => setPlateType(e.target.value) }
-            data={PLATES_TYPE}
-          />
+            <InputSelect
+              label="Tipo de comida"
+              type="text"
+              className="inputPrimary"
+              name=""
+              value=""
+              placeholder=""
+              onChange={(e) => setPlateType(e.target.value)}
+              data={PLATES_TYPE}
+            />
+          </fieldset>
         </form>
 
         <div className="contentFlex">
@@ -64,70 +116,74 @@ export const Products = () => {
 
           {/* Modulo Formulario Nuevo Platillo*/}
           <div className="module">
-            <form action="" >
-              <h2>Platillo</h2>
-              <div className={styles.displayForm}>
-                <Input
-                  label="Nombre"
-                  type="text"
-                  className="inputPrimary"
-                  placeholder=""
-                  name=""
-                  value=""
-                  onChange={() =>{}}
-                  required
-                />
+            <form onSubmit={handleSubmit}>
+              <fieldset>
+                <legend></legend>
+                <h2>Platillo</h2>
+                <div className={styles.displayForm}>
+                  <Input
+                    label="Nombre"
+                    type="text"
+                    className="inputPrimary"
+                    placeholder=""
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
 
-                <InputSelect
-                  label="Tipo de comida"
-                  type="text"
-                  className="inputPrimary"
-                  placeholder=""
-                  onChange={(e) => setPlateType(e.target.value) }
-                  data={PLATES_TYPE}
-                />
+                  <InputSelect
+                    label="Tipo de comida"
+                    className="inputPrimary"
+                    name="typeProduct"
+                    value={formData.typeProduct}
+                    onChange={handleChange}
+                    data={PLATES_TYPE}
+                  />
 
-                <Input
-                  label="Precio"
-                  type="number"
-                  className="inputPrimary"
-                  placeholder=""
-                  name=""
-                  value=""
-                  onChange={() =>{}}
-                  required
-                />
+                  <Input
+                    label="Precio"
+                    type="number"
+                    className="inputPrimary"
+                    placeholder=""
+                    name="price"
+                    value={formData.price}
+                    onChange={handleChange}
+                    required
+                  />
 
-                <Input
-                  label="Descripción"
-                  type="text"
-                  className="inputPrimary"
-                  placeholder="Añada una descripción del producto..."
-                  name=""
-                  value=""
-                  onChange={() =>{}}
-                  required
-                />
+                  <Input
+                    label="Descripción"
+                    type="text"
+                    className="inputPrimary"
+                    placeholder="Añada una descripción del producto..."
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                    required
+                  />
 
-                <Input
-                  label="Imágenes"
-                  type="file"
-                  className="inputPrimary"
-                  placeholder="Añada una descripción del producto..."
-                  name=""
-                  value=""
-                  onChange={() =>{}}
-                  required
-                />
+                  <Input
+                    label="Imágenes"
+                    type="text"
+                    className="inputPrimary"
+                    placeholder="Subir URL foto"
+                    name="file"
+                    value={formData.file}
+                    onChange={handleChange}
+                    required
+                  />
 
-                <div className={styles.divActionsOrder}>
-                  <Button className='btnDelete' text='Eliminar' />
-                  <Button className='btnAdd' text='Añadir' />
+                  <div className={styles.divActionsOrder}>
+                    <Button className='btnDelete' text='Eliminar' />
+                    <Button className='btnAdd' text='Añadir' type='submit'/>
+                  </div>
+
                 </div>
-
-              </div>
+              </fieldset>
 
             </form>
+            {loading && <Loader />}
           </div>
 
         </div>

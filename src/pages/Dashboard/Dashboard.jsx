@@ -24,18 +24,22 @@ export const Dashboard = () => {
 
           {/* Modulo pedidos asociados a mesa*/}
           <div className="module">
-            <form action="" className="formFlex">
-              <InputSelect
-                label="Tipo de comida"
-                type="text"
-                className="inputPrimary"
-                placeholder=""
-                onChange={(e) => setFilter(e.target.value)}
-                data={FILTERS_BY}
-              />
-              <div className={styles.divFilter}>
-                <button type='button' ><i className="fa-solid fa-filter" style={{ width: 25, height: 25 }}></i></button>
-              </div>
+
+            <form>
+              <fieldset className="formFlex">
+                <legend></legend>
+                <InputSelect
+                  label="Tipo de comida"
+                  type="text"
+                  className="inputPrimary"
+                  placeholder=""
+                  onChange={(e) => setFilter(e.target.value)}
+                  data={FILTERS_BY}
+                />
+                <div className={styles.divFilter}>
+                  <button type='button' ><i className="fa-solid fa-filter" style={{ width: 25, height: 25 }}></i></button>
+                </div>
+              </fieldset>
             </form>
             <CardOrder />
           </div>
