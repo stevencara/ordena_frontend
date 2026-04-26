@@ -1,274 +1,259 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
+.hero {
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding-top: 4%;
+}
+
 /* ESTILOS SECCION HERO */
 
 .title1 {
-    font-family: "Pacifico", cursive;
-    color: rgb(255, 174, 0);
-    font-size: 80px;
-    margin-bottom: 20px;
-    text-align: start;
+  font-family: "Pacifico", cursive;
+  color: rgb(255, 174, 0);
+  font-size: 80px;
+  margin-bottom: 20px;
+  text-align: start;
 }
 
 .title2 {
-    font-family: "Pacifico", cursive;
-    font-size: 50px;
-    text-align: center;
-    margin: 20px 0;
+  font-family: "Pacifico", cursive;
+  font-size: 50px;
+  text-align: center;
+  margin: 20px 0;
 }
 
 .title3 {
-    font-family: "Pacifico", cursive;
-    font-size: 36px;
-    text-align: center;
-    margin: 20px 0;
+  font-family: "Pacifico", cursive;
+  font-size: 36px;
+  text-align: center;
+  margin: 0px 0;
 }
 
 .corpus {
-    width: 100%;
-    height: 90vh;
-    padding: 0 10%;
-    display: flex;
-    justify-content: start;
+  width: 100%;
+  height: 90vh;
+  padding: 0 10%;
+  display: flex;
+  justify-content: start;
 }
 
 .corpusTxt {
-    display: flex;
-    width: 50%;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .corpusParagraph {
-    color: white;
-    width: 500px;
-    font-size: 20px;
+  color: white;
+  width: 500px;
+  font-size: 20px;
 }
 
 .corpusImg {
-    width: 50%;
+  width: 50%;
 }
 
 
 /* ESTILOS SECCION PLATOS CLÁSICOS*/
 
 .menu {
-    width: 100%;
-    padding: 0 10%;
-    margin: 150px 0;
-    display: flex;
-    flex-direction: column;
-    background-color: brown;
-    align-items: center;
+  width: 100%;
+  padding: 0 10%;
+  margin: 100px 0;
+  display: flex;
+  flex-direction: column;
+  background-color: brown;
+  align-items: center;
 }
 
 .menuTitle {
-    color: rgb(245, 245, 245);
+  color: rgb(245, 245, 245);
 }
 
 .menuParagraph {
-    width: 600px;
-    text-align: center;
-    margin-bottom: 60px;
-    font-size: 20px;
+  width: 600px;
+  text-align: center;
+  margin-bottom: 60px;
+  font-size: 20px;
 }
 
 .platillos {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    gap: 15px;
-    margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
 
 .platos {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 
 .platosParagraph {
-    text-align: center;
-    justify-content: space-around;
+  text-align: center;
+  justify-content: space-around;
 }
 
 .img1 {
-    background-image: url("../../assets/img1.jpg");
-    background-size: cover;
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    box-shadow: 2px 10px 20px #000;
+  background-image: url("../../assets/img1.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  box-shadow: 2px 10px 20px #000;
 }
 
 .img2 {
-    background-image: url("../../assets/img2.jpg");
-    background-size: cover;
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    box-shadow: 2px 10px 20px #000;
+  background-image: url("../../assets/img2.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  box-shadow: 2px 10px 20px #000;
 }
 
 .img3 {
-    background-image: url("../../assets/img3.jpg");
-    background-size: cover;
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    box-shadow: 2px 10px 20px #000;
+  background-image: url("../../assets/img3.jpeg");
+  background-size: cover;
+  background-position: center;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  box-shadow: 2px 10px 20px #000;
 }
 
 .img1:hover,
 .img2:hover,
 .img3:hover {
-    transform: scale(1.1);
-    transition: 0.2s;
+  transform: scale(1.1);
+  transition: 0.2s;
 }
 
 /* ESTILOS SECCION PLATOS EJECUTIVOS */
 
 .presentation {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: auto;
-    padding: 50px 10% 0;
-    background-color: rgb(41, 41, 41);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 50px 10% 0;
+  background-color: rgb(41, 41, 41);
 }
 
 .presentationTitle {
-    color: rgb(255, 174, 0);
+  color: rgb(255, 174, 0);
 }
 
 
 .presentationInterno {
-    display: flex;
-    width: 1200px;
-    margin-bottom: 10%;
+  display: flex;
+  width: 1200px;
+  margin-bottom: 10%;
 }
 
 .imgPresentation {
-    width: 50%;
-    height: 500px;
-    display: flex;
-    justify-content: center;
+  width: 50%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
 }
 
 .txtPresentation {
-    width: 50%;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 500px;
+  width: 50%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 500px;
 }
 
 .txtPresentationTitle {
-    color: rgb(255, 174, 0);
+  color: rgb(255, 174, 0);
 }
 
 .txtPresentationParagraph {
-    margin-top: 20px;
-    width: 500px;
-    color: white;
+  margin-top: 20px;
+  width: 500px;
+  color: white;
 }
 
 .txtPresentationButton {
-    font-size: 15px;
-    font-weight: 800;
-    border-color: transparent;
-    margin-top: 20px;
-    width: 200px;
-    padding: 20px;
-    color: black;
-    background-color: rgb(255, 174, 0);
+  font-size: 15px;
+  font-weight: 800;
+  border-color: transparent;
+  margin-top: 20px;
+  width: 200px;
+  padding: 20px;
+  color: black;
+  background-color: rgb(255, 174, 0);
 }
 
 .imgPlato {
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
 }
 
 .uno {
-    background-image: url("../../assets/img4.jpg");
-    box-shadow: 2px 10px 20px #000;
+  background-image: url("../../assets/img4.avif");
+  background-size: cover;
+  background-position: center;
+  box-shadow: 2px 10px 20px #000;
 }
 
 .dos {
-    background-image: url("../../assets/img5.jpg");
-    box-shadow: 2px 10px 20px #000;
+  background-image: url("../../assets/img5.jpeg");
+  background-size: cover;
+  background-position: center;
+  box-shadow: 2px 10px 20px #000;
 }
 
 .uno:hover,
 .dos:hover {
-    transform: scale(1.1);
-    transition: 0.2s;
+  transform: scale(1.1);
+  transition: 0.2s;
 }
 
 
 /* ESTILOS SECCION BANER DE PRESENTACION */
 
 .finalTxt {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 200px;
-    padding: 0 10%;
-    height: 700px;
-    background-image: linear-gradient(rgba(255, 251, 0, 0.9), rgba(255, 251, 0, 0.9)), url("../../assets/img5.jpg");
-    background-size: cover;
-    background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  padding: 0 10%;
+  height: 700px;
+  background-image: linear-gradient(rgba(255, 251, 0, 0.9), rgba(255, 251, 0, 0.9)), url("../../assets/img5.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 .finalTxtParagraph {
-    width: 600px;
-    text-align: center;
-    font-size: 25px;
+  width: 600px;
+  text-align: center;
+  font-size: 25px;
 }
 
 .finalTxtTitle {
-    color: black;
+  color: black;
 }
 
-
-/* ESTILOS SECCION SUSCRIPCION */
-
-.suscription {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 0 10%;
-    height: 700px;
-}
-
-.suscriptionTitle {
-    color: black;
-}
-
-.suscriptionParagraph {
-    font-size: 20px;
-    text-align: center;
-    width: 800px;
-}
-
-.formText {
-    margin-top: 10px;
-}
-
-.formTextInput {
-    border: 1px solid rgb(179, 179, 179);
-    height: 30px;
-}

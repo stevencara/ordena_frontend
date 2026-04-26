@@ -45,7 +45,7 @@ export const Statistics = () => {
 				}
 				return prev + 1
 			})
-		}, 8)
+		}, 7)
 
 		let intervalPlates = setInterval(() => {
 			setVisible(true);

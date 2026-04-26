@@ -22,10 +22,7 @@ export const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('El formulario fue enviado:', formData)
-    setFormData({
-      email: "",
-      password: ""
-    })
+
     navigate('/dashboard')
   }
 
@@ -64,7 +61,7 @@ export const Login = () => {
 
             <div className={styles.countOptions}>
               <p className={styles.paragragh}><Link to="/" className={styles.link}>Olvide mi contraseña</Link></p>
-              <p className={styles.paragragh}>¿No tienes cuenta? <span><Link to="/" className={styles.link}>Registrate</Link></span></p>
+              <p className={styles.paragragh}>¿No tienes cuenta? <span><Link to="/register" className={styles.link}>Registrate</Link></span></p>
             </div>
 
           </div>

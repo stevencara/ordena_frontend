@@ -1,0 +1,38 @@
+
+/* ESTILOS SECCION SUSCRIPCION */
+.title2 {
+  font-family: "Pacifico", cursive;
+  font-size: 50px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.suscription {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 10%;
+  height: 700px;
+  background-color: rgb(245, 245, 245);
+}
+
+.suscriptionTitle {
+  color: black;
+}
+
+.suscriptionParagraph {
+  font-size: 20px;
+  text-align: center;
+  width: 800px;
+}
+
+.formText {
+  margin-top: 10px;
+}
+
+.formTextInput {
+  border: 1px solid rgb(179, 179, 179);
+  height: 30px;
+}
