@@ -1,8 +1,24 @@
 import styles from './CardOrder.module.css'
 import { Button } from '../../../components/Button/Button'
 import { Input } from '../../../components/Input/Input'
+import { useEffect } from 'react'
 
-export const CardOrder = () => {
+export const CardOrder = ({ products, setProducts }) => {
+
+  useEffect(() => {
+    console.log("Productos se ha actualizado", products)
+  }, [products])
+
+  const totalResumen = products?.reduce((acc, product) => {
+    const price = product.price ? product.price : 50000
+    return acc + (price * product.quantity)
+  }, 0)
+
+  const deleteProduct = (indexToDelete) => {
+    const updatedProducts = products.filter(( _,index) => indexToDelete !== index)
+    setProducts(updatedProducts)
+  }
+
   return (
     <div className={styles.cardOrder}>
       <h2 className={styles.cardTitle}>Mesa 1 - Pedido #1053</h2>
@@ -16,50 +32,39 @@ export const CardOrder = () => {
       <table className={styles.tableOrder}>
         <thead>
           <tr>
-            <th>Sopas</th>
+            <th>Producto</th>
             <th>Cant.</th>
-            <th>Costo ($)</th>
+            <th>Precio</th>
+            <th>Subtotal</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Ajiaco Santafereño</td>
-            <td>1</td>
-            <td>12000</td>
-            <td><i className="fa-solid fa-trash-can"></i></td>
-          </tr>
-          <tr>
-            <td>Hamburguesa</td>
-            <td>2</td>
-            <td>30000</td>
-            <td><i className="fa-solid fa-trash-can"></i></td>
-          </tr>
-          <tr>
-            <td>Cerveza 1lt Brahma</td>
-            <td>2</td>
-            <td>8000</td>
-            <td><i className="fa-solid fa-trash-can"></i></td>
-          </tr>
+          {products?.map((product, index) => (
+            <tr key={index}>
+              <td>{product.name}</td>
+              <td>{product.quantity}</td>
+              <td>{product.price ? Number(product.price) : 50000}</td>
+              <td>{(product.price ? Number(product.price) : 50000) * (product.quantity)}</td>
+              <td><i className="fa-solid fa-trash-can" style={{color:"red"}}
+              onClick={() => deleteProduct(index) }></i></td>
+            </tr>
+          ))}
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan="2"><strong>Total</strong></td>
-            <td colSpan="2"><strong>50000</strong></td>
+            <td colSpan="3"><strong>Total</strong></td>
+            <td colSpan="1"><strong>$ {totalResumen}</strong></td>
           </tr>
         </tfoot>
       </table>
 
-        <Input
-          label="Observaciones"
-          type="text"
-          className="inputDescription"
-          placeholder=""
-          name=""
-          value=""
-          onChange={() => {}}
-          variant = "Light"
-        />
+      <p>Observaciones</p>
+      <ul className={styles.description}>
+        {products?.map((product, index) => (
+          <li key={index}>{product.description}</li>
+        ))}
+      </ul>
 
       <div className={styles.divActionsOrder}>
         <Button className='btnDelete' text='Eliminar' />

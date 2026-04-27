@@ -6,6 +6,8 @@ export const Tables = () => {
 
   const [tables, setTables] = useState([]);
   const [selectedTable, setSelectedTable] = useState(null);
+  const [table, setTable] = useState("")
+  const [order, setOrder] = useState("")
 
   useEffect(() => {
     fetch('/api/tables.json')
@@ -25,9 +27,9 @@ export const Tables = () => {
             type="number"
             className="inputPrimary"
             placeholder=""
-            name=""
-            value=""
-            onChange={() => { }}
+            name="numberTable"
+            value={table}
+            onChange={(e) => setTable(e.target.value)}
             required
             variant='dark'
           />
@@ -37,9 +39,9 @@ export const Tables = () => {
             type="number"
             className="inputPrimary"
             placeholder=""
-            name=""
-            value=""
-            onChange={() => { }}
+            name="numberOrder"
+            value={order}
+            onChange={(e) => setOrder(e.target.value)}
             required
             variant='dark'
           />

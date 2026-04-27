@@ -8,6 +8,7 @@ import { Loader } from '../../components/Loader/Loader'
 export const Products = () => {
   const [products, setProducts] = useState([])
   const [plateType, setPlateType] = useState("Todos")
+  const [product, setProduct] = useState("")
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
@@ -56,7 +57,11 @@ export const Products = () => {
       return
     }
     console.log(`El formulario enviado es: `, formData)
+    alert("Producto creado correctamente: ", formData.name)
     setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000)
 
     setFormData({
       name: "",
@@ -65,10 +70,6 @@ export const Products = () => {
       description: "",
       file: ""
     })
-
-    setTimeout(() => {
-      setLoading(false)
-    }, 3000)
 
   }
 
@@ -85,9 +86,9 @@ export const Products = () => {
               type="text"
               className="inputPrimary"
               placeholder=""
-              name=""
-              value=""
-              onChange={() => { }}
+              name="productName"
+              value={product}
+              onChange={(e) => setProduct(e.target.value)}
               variant='dark'
             />
 
@@ -176,7 +177,7 @@ export const Products = () => {
 
                   <div className={styles.divActionsOrder}>
                     <Button className='btnDelete' text='Eliminar' />
-                    <Button className='btnAdd' text='Añadir' type='submit'/>
+                    <Button className='btnAdd' text='Añadir' type='submit' />
                   </div>
 
                 </div>

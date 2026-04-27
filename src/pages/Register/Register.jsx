@@ -75,6 +75,7 @@ export const Register = () => {
       return
     }
     console.log(`El formulario enviado es: `, formData)
+    alert("Te has registrado exitosamente")
     setLoading(true)
 
     setFormData({
@@ -94,7 +95,7 @@ export const Register = () => {
     setTimeout(() => {
       setLoading(false)
       navigate('/login')
-    }, 3000)
+    }, 2000)
 
   }
 
@@ -218,7 +219,7 @@ export const Register = () => {
                       required
                     />
                     <i className={`fa-solid fa-eye ${styles.icon}`}
-                      onClick={()=>setVisible(!visible)}
+                      onClick={() => setVisible(!visible)}
                     ></i>
                   </div>
 

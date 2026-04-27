@@ -3,10 +3,12 @@ import styles from './MenuHamburguer.module.css'
 import { Link, useNavigate } from "react-router-dom";
 import { Modal } from "../../components/Modal/Modal";
 import { Button } from "../Button/Button";
+import { Loader } from "../Loader/Loader";
 
 export const MenuHamburguer = () => {
 
   const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const navigate = useNavigate()
 
@@ -46,7 +48,15 @@ export const MenuHamburguer = () => {
 
             <Button
               text="Aceptar"
-              onClick={() => { setIsOpenModal(false); navigate('/'); setIsOpen(false) }}
+              onClick={() => {
+                setIsOpenModal(false);
+                setLoading(true)
+                setTimeout(() => {
+                  setLoading(false)
+                  setIsOpen(false)
+                  navigate('/');
+                }, 2000)
+              }}
               className='btnSignOut'
               type="button"
             />
@@ -58,6 +68,8 @@ export const MenuHamburguer = () => {
             />
           </Modal>
         </ul>
+
+        {loading && <Loader />}
 
       </div>
 

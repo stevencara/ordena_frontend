@@ -10,6 +10,7 @@ export const Input = forwardRef(({
   value = "",
   min="",
   max="",
+  maxLength,
   onChange,
   variant = "dark"
 }, ref) => {
@@ -27,6 +28,7 @@ export const Input = forwardRef(({
           name={name}
           min={min}
           max={max}
+          maxLength={maxLength}
           value={value || ""}
           onChange={onChange}
         />

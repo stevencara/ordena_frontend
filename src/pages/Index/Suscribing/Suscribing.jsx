@@ -3,9 +3,11 @@ import styles from "./Suscribing.module.css"
 import { Input } from "../../../components/Input/Input"
 import { Button } from "../../../components/Button/Button"
 import { Loader } from "../../../components/Loader/Loader"
+import { useNavigate } from "react-router-dom"
 export const Suscribing = () => {
   const [formData, setFormData] = useState("")
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -20,10 +22,9 @@ export const Suscribing = () => {
       return
     }
     setLoading(true)
-
     setTimeout(() => {
       setLoading(false)
-    }, [3000])
+    }, 2000)
 
     console.log(formData)
     setFormData("")

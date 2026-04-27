@@ -5,9 +5,11 @@ import styles from './Users.module.css'
 import { useEffect, useRef, useState } from 'react'
 import { COUNTRIES } from "../../data/data.js"
 import { useNavigate } from 'react-router-dom'
+import { Loader } from '../../components/Loader/Loader.jsx'
 
 export const Users = () => {
   const [users, setUsers] = useState([]);
+  const [user, setUser] = useState("");
   const [visible, setVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   const [userType, setUserType] = useState("Todos")
@@ -23,7 +25,6 @@ export const Users = () => {
     password: "",
     confirmPassword: ""
   })
-  const navigate = useNavigate()
 
   // OPCIONES DE INPUTS TIPO SELECT
   const USERS_TYPE = ["Todos", "Mesero", "Cocinero", "Administrador", "Cliente"]
@@ -89,7 +90,12 @@ export const Users = () => {
     }
 
     console.log(`El formulario enviado es: `, formData)
+    alert("Usuario creado correctamente: ", formData.name)
+    
     setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000)
 
     setFormData({
       name: "",
@@ -105,15 +111,11 @@ export const Users = () => {
       acceptedTerms: false
     })
 
-    setTimeout(() => {
-      setLoading(false)
-      navigate('/users')
-    }, 3000)
-
   }
+
   // ABRIR CALENDARIO CON CLICK EN ICONO
   const dataRef = useRef(null)
-  const openCalendar = () => { dataRef.current.showPicker()}
+  const openCalendar = () => { dataRef.current.showPicker() }
 
   return (
     <div className="background">
@@ -128,9 +130,9 @@ export const Users = () => {
               type="text"
               placeholder=""
               className="inputPrimary"
-              name=""
-              value=""
-              onChange={()=>{}}
+              name="userName"
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
               required
             />
 
@@ -292,6 +294,8 @@ export const Users = () => {
 
               </fieldset>
             </form>
+
+            {loading && <Loader />}
           </div>
 
         </div>

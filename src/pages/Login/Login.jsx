@@ -21,7 +21,7 @@ export const Login = () => {
       [name]: value
     }))
   }
-  
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,12 +29,14 @@ export const Login = () => {
       alert("Debes ingresar un correo válido")
       return
     }
-    setLoading(true)
+
     console.log('El formulario fue enviado:', formData)
+    alert("Te has logueado exitosamente")
+    setLoading(true)
     setTimeout(() => {
-      setLoading(false);
-      navigate('/dashboard')
-    }, 3000);
+      setLoading(false)
+      navigate('/dashboard');
+    }, 2000)
   }
 
   return (

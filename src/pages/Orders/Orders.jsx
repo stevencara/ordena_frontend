@@ -7,12 +7,17 @@ import { Loader } from '../../components/Loader/Loader'
 
 export const Orders = () => {
   const [loading, setLoading] = useState(false)
+  const [products, setProducts] = useState([])
+  const [table, setTable] = useState("")
+  const [order, setOrder] = useState("")
   const [formData, setFormData] = useState({
     typeProduct: "",
     name: "",
     quantity: 0,
     description: "",
   })
+
+
 
   // OPCIONES DE INPUTS TIPO SELECT
   const PLATES_TYPE = ["Todos", "Hamburguesas", "Pizzas", "Ensaladas", "Mexicana", "Japonesa", "Pastas", "Bebidas", "Saludable", "Carnes", "Postres", "Niños", "Acompañamientos", "Entradas", "Internacional"]
@@ -38,8 +43,16 @@ export const Orders = () => {
       alert("Hay campos vacíos")
       return
     }
-    console.log(`El formulario enviado es: `, formData)
+    // console.log(`El formulario enviado es: `, formData)
+
+    const newProduct = { ...formData }
+    const updatedProducts = [...products, newProduct]
+    setProducts(updatedProducts)
+
     setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000)
 
     setFormData({
       typeProduct: "",
@@ -48,11 +61,9 @@ export const Orders = () => {
       description: "",
     })
 
-    setTimeout(() => {
-      setLoading(false)
-    }, 3000)
 
   }
+
 
 
   return (
@@ -72,9 +83,9 @@ export const Orders = () => {
                   type="number"
                   className="inputPrimary"
                   placeholder=""
-                  name=""
-                  value=""
-                  onChange={() => { }}
+                  name="numberTable"
+                  value={table}
+                  onChange={(e) => setTable(e.target.value)}
                   required
                   variant='dark'
                 />
@@ -84,9 +95,9 @@ export const Orders = () => {
                   type="number"
                   className="inputPrimary"
                   placeholder=""
-                  name=""
-                  value=""
-                  onChange={() => { }}
+                  name="numberOrder"
+                  value={order}
+                  onChange={(e) => setOrder(e.target.value)}
                   required
                   variant='dark'
                 />
@@ -117,6 +128,7 @@ export const Orders = () => {
                   <Input
                     label="Platillo"
                     type="text"
+                    maxLength="50"
                     className="inputPrimary"
                     placeholder="Elegí el platillo"
                     name="name"
@@ -129,6 +141,8 @@ export const Orders = () => {
                   <Input
                     label="Cantidad"
                     type="number"
+                    min="1"
+                    max="30"
                     className="inputPrimary"
                     placeholder="Elegí el platillo"
                     name="quantity"
@@ -166,7 +180,7 @@ export const Orders = () => {
 
           {/* MODULO DETALLE PEDIDO*/}
           <div className="module">
-            <CardOrder />
+            <CardOrder products={products} setProducts={setProducts} />
           </div>
 
         </div>

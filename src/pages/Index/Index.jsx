@@ -7,6 +7,7 @@ import { Statistics } from "./Statistics/Statistics"
 import { Suscribing } from "./Suscribing/Suscribing"
 import { CommonPlates } from "./CommonPlates/CommonPlates"
 import { Hero } from "./Hero/Hero"
+import { Location } from "./Location/Location"
 
 export const Index = () => {
 
@@ -24,6 +25,9 @@ export const Index = () => {
 
       {/* Seccion Reseñas */}
       <Statistics />
+
+      {/* Seccion Ubicación */}
+      <Location />
 
       {/* Seccion Texto Final */}
       <section className={styles.finalTxt}>
