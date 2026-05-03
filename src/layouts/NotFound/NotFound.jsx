@@ -18,8 +18,8 @@ export const NotFound = () => {
       <br />
       <br />
       <h1>Pagina no encontrada</h1>
-      <div className={styles.divButton} onClic={handleClic} >
-        <Link to="/"><li className={styles.navItem}>Ir a inicio</li></Link>
+      <div className={styles.divButton} onClick={handleClic} >
+        <Link to="/index"><li className={styles.navItem}>Ir a inicio</li></Link>
       </div>
       <br />
     </div>

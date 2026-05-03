@@ -8,6 +8,7 @@ import { CommonPlates } from "./CommonPlates/CommonPlates"
 import { Hero } from "./Hero/Hero"
 import { Location } from "./Location/Location"
 
+
 export const Index = () => {
 
   return (
@@ -40,6 +41,7 @@ export const Index = () => {
 
       {/* Pie de página */}
       <Footer />
+
     </main>
 
   )

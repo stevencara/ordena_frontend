@@ -3,9 +3,17 @@ import { Tables } from './Tables/Tables'
 import styles from './Dashboard.module.css'
 import { InputSelect } from '../../components/Input/Input'
 import { useState } from 'react'
+import { useAuth } from '../../hooks/useAuth'
+import { Products } from '../Products/Products'
+import { Users } from '../Users/Users'
+import { ViewOrders } from '../ViewOrders/ViewOrders'
+import { Register } from '../Register/Register'
+import { Orders } from '../Orders/Orders'
+import { Index } from '../Index/Index'
 
 export const Dashboard = () => {
   const [filter, setFilter] = useState("")
+  const { user, logout } = useAuth()
 
   const FILTERS_BY = ["Más reciente", "Más antiguos", "Mayor precio", "Menor precio"]
 
@@ -44,8 +52,17 @@ export const Dashboard = () => {
             <CardOrder />
           </div>
 
+
+
         </div>
       </div>
+
+      <div className="" style={{ display: "flex", flexDirection: "column", background: "black", textAlign: "center" }}>
+        <h2 style={{ color: "white" }}>Bienvenido {user.nombre}</h2>
+        <p style={{ color: "white" }}>Rol: {user.rol}</p>
+        <button onClick={logout}>Cerrar sesión</button>
+      </div>
+
     </div>
   )
 }

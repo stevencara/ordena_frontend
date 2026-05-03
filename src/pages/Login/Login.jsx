@@ -1,22 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Login.module.css"
 import { Link, useNavigate } from "react-router-dom"
 import { Input } from "../../components/Input/Input";
 import { Button } from "../../components/Button/Button";
 import { Loader } from "../../components/Loader/Loader";
+import { useAuth } from "../../hooks/useAuth";
+import { roleRoutes } from "../../utils/roleRoutes";
 
 export const Login = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const [formData, setFormData] = useState({
+  useEffect(() => {
+    console.error(error)
+  }, [error])
+
+  const [form, setForm] = useState({
     email: "",
     password: ""
   })
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData(prev => ({
+    setForm(prev => ({
       ...prev,
       [name]: value
     }))
@@ -25,17 +33,26 @@ export const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.email.includes('@')) {
+    if (!form.email.includes('@')) {
       alert("Debes ingresar un correo válido")
       return
     }
 
-    console.log('El formulario fue enviado:', formData)
+    const res = login(form.email, form.password)
+
+    if (!res.success) {
+      setError(res.message)
+      return
+    }
+
+    
+    console.log('El formulario fue enviado:', form)
     alert("Te has logueado exitosamente")
     setLoading(true)
+    const ruta = roleRoutes[res.user.rol]
     setTimeout(() => {
       setLoading(false)
-      navigate('/dashboard');
+      navigate(ruta);
     }, 2000)
   }
 
@@ -56,7 +73,7 @@ export const Login = () => {
                   placeholder="henan.c@gmail.com"
                   className="inputPrimary"
                   required
-                  value={formData.email}
+                  value={form.email}
                   onChange={handleChange}
                 />
 
@@ -67,25 +84,34 @@ export const Login = () => {
                   placeholder="**************"
                   className="inputPrimary"
                   required
-                  value={formData.password}
+                  value={form.password}
                   onChange={handleChange}
                 />
 
-                <Button text="Ingresar" type="submit" className="btnLogin" />
-                {loading && <Loader />}
-              </form>
-            </fieldset>
+                {error && <p style={{
+                  color: "red",
+                  fontSize: "10px"}}>{error}</p>}
 
-            <div className={styles.countOptions}>
-              <p className={styles.paragragh}><Link to="/" className={styles.link}>Olvide mi contraseña</Link></p>
-              <p className={styles.paragragh}>¿No tienes cuenta? <span><Link to="/register" className={styles.link}>Regístrate</Link></span></p>
-            </div>
+              <Button text="Ingresar" type="submit" className="btnLogin" />
+              {loading && <Loader />}
+            </form>
+          </fieldset>
 
-
+          <div className={styles.countOptions}>
+            <p className={styles.paragragh}><Link to="/index" className={styles.link}>Olvide mi contraseña</Link></p>
+            <p className={styles.paragragh}>¿No tienes cuenta? <span><Link to="/register" className={styles.link}>Regístrate</Link></span></p>
           </div>
-        </div>
 
+          <div>
+            <Button text="Admin" type="button" className="btnLogin" onClick={() => login('admin')} />
+            <Button text="Cocinero" type="button" className="btnLogin" onClick={() => login('cocinero')} />
+            <Button text="Cliente" type="button" className="btnLogin" onClick={() => login('cliente')} />
+          </div>
+
+        </div>
       </div>
+
+    </div >
     </>
   )
 }

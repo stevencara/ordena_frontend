@@ -237,7 +237,7 @@ export const Register = () => {
 
                 </div>
 
-                <input type="checkbox" id="user-acept_terms" name="acceptedTerms" checked={formData.acceptedTerms} onChange={handleChange} /><span className={styles.spanStyle}>  Al continuar, aceptas los <Link to="/" className={styles.link}>Términos y Condiciones</Link> y el <Link to="/" className={styles.link} >Aviso de Privacidad</Link></span>
+                <input type="checkbox" id="user-acept_terms" name="acceptedTerms" checked={formData.acceptedTerms} onChange={handleChange} /><span className={styles.spanStyle}>  Al continuar, aceptas los <Link to="/index" className={styles.link}>Términos y Condiciones</Link> y el <Link to="/index" className={styles.link} >Aviso de Privacidad</Link></span>
                 <Button className='btnRegister' text='Registrarse' type="submit" />
 
 
