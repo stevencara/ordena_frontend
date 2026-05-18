@@ -3,7 +3,7 @@ import { Button } from '../../../components/Button/Button'
 import { Input } from '../../../components/Input/Input'
 import { useEffect } from 'react'
 
-export const CardOrder = ({ products, setProducts }) => {
+export const CardOrder = ({ products, setProducts, orders=[] }) => {
 
   useEffect(() => {
     console.log("Productos se ha actualizado", products)
@@ -21,7 +21,7 @@ export const CardOrder = ({ products, setProducts }) => {
 
   return (
     <div className={styles.cardOrder}>
-      <h2 className={styles.cardTitle}>Mesa 1 - Pedido #1053</h2>
+      <h2 className={styles.cardTitle}>Mesa {orders.id} - Pedido #1053</h2>
       <div className={styles.state}>Pendiente</div>
 
       <label className={styles.labelCardItem}>Mesero: </label><span className={styles.spanCardItem}>Maria Isabel Perez</span>

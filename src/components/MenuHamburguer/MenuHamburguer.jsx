@@ -65,8 +65,8 @@ export const MenuHamburguer = () => {
                 setTimeout(() => {
                   setLoading(false)
                   setIsOpen(false)
-                  navigate('/');
                   logout()
+                  navigate('/index');
                 }, 2000)
 
               }}

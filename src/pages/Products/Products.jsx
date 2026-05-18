@@ -4,6 +4,7 @@ import { ProductItem } from './ProductItem/ProductItem'
 import { useEffect, useState } from 'react'
 import { Input, InputSelect } from '../../components/Input/Input'
 import { Loader } from '../../components/Loader/Loader'
+import { PLATES_TYPE } from '../../data/options'
 
 export const Products = () => {
   const [products, setProducts] = useState([])
@@ -17,7 +18,6 @@ export const Products = () => {
     description: "",
     file: ""
   })
-  const PLATES_TYPE = ["Todos", "Hamburguesas", "Pizzas", "Ensaladas", "Mexicana", "Japonesa", "Pastas", "Bebidas", "Saludable", "Carnes", "Postres", "Niños", "Acompañamientos", "Entradas", "Internacional"]
 
   useEffect(() => {
     fetch('/api/products.json')
@@ -81,7 +81,7 @@ export const Products = () => {
 
           <form >
             <fieldset className="form-flex">
-              <legend></legend>
+              <legend>Filtro</legend>
               <Input
                 label="Buscar"
                 type="text"
@@ -93,7 +93,7 @@ export const Products = () => {
                 variant='dark'
               />
 
-              <div className={styles.divSearch}>
+              <div className="divSearch">
                 <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
               </div>
 
@@ -119,9 +119,9 @@ export const Products = () => {
             {/* Modulo Formulario Nuevo Platillo*/}
             <div className="module">
               <form onSubmit={handleSubmit}>
+                <h2>Nuevo Producto</h2>
                 <fieldset>
-                  <legend></legend>
-                  <h2>Platillo</h2>
+                  <legend>Datos del Producto</legend>
                   <div className={styles.displayForm}>
                     <Input
                       label="Nombre"

@@ -6,9 +6,14 @@ export function Modal({ isOpenModal, onCloseModal, children }) {
   return (
     <div className={styles.modalOverlay} onClick={onCloseModal}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}  >
-        <button text="Cerrar" style={{ display: 'flex', width: '100%', justifyContent: 'end', backgroundColor: 'white', border:'none' }} onClick={onCloseModal}>
-          <i className="fa-solid fa-rectangle-xmark" style={{ color: 'brown', fontSize:'24px', cursor:'pointer' }}></i>
-        </button>
+
+        <div onClick={(e) => e.stopPropagation()} style={{
+          display: 'flex', width: '100%', justifyContent: 'end', alignItems: "center"
+        }}  >
+          <button text="Cerrar" onClick={onCloseModal}>
+            <i className="fa-solid fa-rectangle-xmark" style={{ color: 'brown', fontSize: '24px', cursor: 'pointer' }}></i>
+          </button>
+        </div>
         {children}
       </div>
     </div>

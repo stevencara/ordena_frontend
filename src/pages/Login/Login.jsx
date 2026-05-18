@@ -6,12 +6,15 @@ import { Button } from "../../components/Button/Button";
 import { Loader } from "../../components/Loader/Loader";
 import { useAuth } from "../../hooks/useAuth";
 import { roleRoutes } from "../../utils/roleRoutes";
+import { Modal } from "../../components/Modal/Modal";
 
 export const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [email, setEmail] = useState("")
 
   useEffect(() => {
     console.error(error)
@@ -45,7 +48,7 @@ export const Login = () => {
       return
     }
 
-    
+
     console.log('El formulario fue enviado:', form)
     alert("Te has logueado exitosamente")
     setLoading(true)
@@ -56,6 +59,21 @@ export const Login = () => {
     }, 2000)
   }
 
+  // FUNCIÓN PARA ENVIAR EL CORREO DE RECUPERACION
+  const handleSubmitEmailToRecoverCredencials = (e) => {
+    
+    e.preventDefault();
+    if (!email.includes('@')) {
+      alert("Debes ingresar un correo válido")
+      return
+    }
+
+    console.log("El correo a recuperar es: ", email)
+    alert("Se envió correo de recuperación a ", email)
+    setOpenModal(false);
+    setEmail("")
+  };
+
   return (
     <>
       <div className="background">
@@ -64,7 +82,7 @@ export const Login = () => {
 
             <h1>Iniciar Sesión</h1>
             <fieldset>
-              <legend>Datos</legend>
+              <legend>Datos de usuario</legend>
               <form action="" onSubmit={handleSubmit}>
                 <Input
                   label="Correo Electrónico"
@@ -90,22 +108,48 @@ export const Login = () => {
 
                 {error && <p style={{
                   color: "red",
-                  fontSize: "10px"}}>{error}</p>}
+                  fontSize: "10px"
+                }}>{error}</p>}
 
-              <Button text="Ingresar" type="submit" className="btnLogin" />
-              {loading && <Loader />}
-            </form>
-          </fieldset>
+                <Button text="Ingresar" type="submit" className="btnLogin" />
+                {loading && <Loader />}
+              </form>
+            </fieldset>
 
-          <div className={styles.countOptions}>
-            <p className={styles.paragragh}><Link to="/index" className={styles.link}>Olvide mi contraseña</Link></p>
-            <p className={styles.paragragh}>¿No tienes cuenta? <span><Link to="/register" className={styles.link}>Regístrate</Link></span></p>
+            <div className={styles.countOptions}>
+              <p className={styles.paragragh}><Link className={styles.link} onClick={() => setOpenModal(!openModal)}>Olvide mi contraseña</Link></p>
+              <p className={styles.paragragh}>¿No tienes cuenta? <span><Link to="/register" className={styles.link}>Regístrate</Link></span></p>
+            </div>
+
+            {/* Modal Recuperación de credenciales */}
+            <Modal isOpenModal={openModal} onCloseModal={() => setOpenModal(!openModal)} onAccept={() => { }} >
+              <div style={{ width: "100%", height: "100%", }}>
+                <h3 style={{ color: "black" }}>Recuperar contraseña</h3>
+                <fieldset>
+                  <legend>Datos de usuario</legend>
+                  <form action="" onSubmit={handleSubmitEmailToRecoverCredencials}>
+                    <Input
+                      label="Correo Electrónico"
+                      name="email"
+                      type="email"
+                      placeholder=""
+                      className=""
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      variant=""
+                    />
+
+                    <Button className='btnRegister' text='Solicitar recuperación' type="submit" />
+                  </form>
+                </fieldset>
+              </div>
+            </Modal>
+
           </div>
-
         </div>
-      </div>
 
-    </div >
+      </div >
     </>
   )
 }

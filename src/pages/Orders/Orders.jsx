@@ -4,6 +4,7 @@ import { Button } from '../../components/Button/Button'
 import { Input, InputSelect } from '../../components/Input/Input'
 import { useState } from 'react'
 import { Loader } from '../../components/Loader/Loader'
+import { PLATES_TYPE } from '../../data/options'
 
 export const Orders = () => {
   const [loading, setLoading] = useState(false)
@@ -16,11 +17,6 @@ export const Orders = () => {
     quantity: 0,
     description: "",
   })
-
-
-
-  // OPCIONES DE INPUTS TIPO SELECT
-  const PLATES_TYPE = ["Todos", "Hamburguesas", "Pizzas", "Ensaladas", "Mexicana", "Japonesa", "Pastas", "Bebidas", "Saludable", "Carnes", "Postres", "Niños", "Acompañamientos", "Entradas", "Internacional"]
 
   // CAPTURAR DATOS DE FORMULARIO CREACION DE USUARIO
   const handleChange = (e) => {
@@ -103,7 +99,7 @@ export const Orders = () => {
                     variant='dark'
                   />
 
-                  <div className={styles.divSearch}>
+                  <div className="divSearch">
                     <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
                   </div>
                 </fieldset>

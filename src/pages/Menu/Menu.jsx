@@ -79,7 +79,7 @@ export const Menu = () => {
 
           <form onSubmit={handleSubmit}>
             <fieldset className="form-flex">
-              <legend></legend>
+              <legend>Filtro</legend>
               <Input
                 label="Buscar"
                 type="text"
@@ -91,7 +91,7 @@ export const Menu = () => {
                 variant='dark'
               />
 
-              <div className={styles.divSearch}>
+              <div className="divSearch">
                 <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "25px", textAlign: "center", cursor: "pointer" }}></i></button>
               </div>
 

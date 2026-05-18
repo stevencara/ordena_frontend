@@ -21,13 +21,13 @@ export const Tables = () => {
     <div>
       <form>
         <fieldset className="form-flex">
-          <legend></legend>
+          <legend>Filtro</legend>
           <Input
             label="N° de mesa"
             type="number"
             className="inputPrimary"
             placeholder=""
-            name="numberTable"
+            name=""
             value={table}
             onChange={(e) => setTable(e.target.value)}
             required
@@ -46,7 +46,7 @@ export const Tables = () => {
             variant='dark'
           />
 
-          <div className={styles.divSearch}>
+          <div className="divSearch">
             <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
           </div>
 
@@ -55,7 +55,11 @@ export const Tables = () => {
       </form>
 
       <div className={styles.gridTables}>
-        {tables.map((table) => (
+
+        {(table 
+          ? tables.filter((t) => Number(table) === t.number) 
+          : tables)
+        .map((table) => (
           <div
             key={table.number}
             className={`${styles.tableItem} ${selectedTable === table.number ? styles.classOrange : styles.classWhite}`}

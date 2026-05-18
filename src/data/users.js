@@ -2,7 +2,7 @@ export const users = [
   {
     email: "admin@test.com",
     password: "123",
-    nombre: "Admin",
+    nombre: "José",
     rol: "admin",
   },
   {
