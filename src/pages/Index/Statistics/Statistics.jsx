@@ -111,9 +111,10 @@ export const Statistics = () => {
 				<p className={styles.datesTotalParagraph}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci nemo aut sequi aliquam labore architecto nisi consequuntur. Possimus quos fugiat vero laboriosam, rem repellendus veritatis voluptas temporibus, laborum velit aut.</p>
 
 				<div className={styles.tips}>
+
 					<article className={styles.circle}>
 						<h2 className={styles.circleTitle2}>+{clients}</h2>
-						<h3>Clientes</h3>
+						<h3 className={styles.circleTitle3}>Clientes</h3>
 					</article>
 
 					<article className={styles.circle} >
@@ -123,7 +124,7 @@ export const Statistics = () => {
 
 					<article className={styles.circle}>
 						<h2 className={styles.circleTitle2}>+{years}</h2>
-						<h3 className={styles.circleTitle3}>Años de trayecto</h3>
+						<h3 className={styles.circleTitle3}>Años</h3>
 					</article>
 
 					<article className={styles.circle}>
@@ -132,7 +133,7 @@ export const Statistics = () => {
 					</article>
 
 					<article className={styles.circle}>
-						<h2 className={styles.circleTitle2}>{ranking}</h2>
+						<h2 className={styles.circleTitle2}>#{ranking}</h2>
 						<h3 className={styles.circleTitle3} >Top</h3>
 					</article>
 				</div>

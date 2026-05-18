@@ -106,136 +106,140 @@ export const Register = () => {
   return (
     <>
       <div className="background">
-        <div className={styles.contentRegister}>
-          <div className={styles.formRegister}>
+        <div className="container">
+          <div className="container-form">
 
-            <h1 className={styles.title}>Regístrate</h1>
+            <h1>Regístrate</h1>
 
 
             <form onSubmit={handleSubmit} >
               <fieldset>
-                <legend></legend>
-                <div className={styles.displayForm}>
-                  <Input
-                    label="Nombres"
-                    type="text"
-                    placeholder="Hernán"
-                    className="inputPrimary"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
+                <legend> Información personal </legend>
 
-                  <Input
-                    label="Apellidos"
-                    type="text"
-                    placeholder="Cortés"
-                    className="inputPrimary"
-                    name="lastname"
-                    value={formData.lastname}
-                    onChange={handleChange}
-                    required
-                  />
+                <Input
+                  label="Nombres"
+                  type="text"
+                  placeholder=""
+                  className="inputPrimary"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
 
+                <Input
+                  label="Apellidos"
+                  type="text"
+                  placeholder=""
+                  className="inputPrimary"
+                  name="lastname"
+                  value={formData.lastname}
+                  onChange={handleChange}
+                  required
+                />
+
+                <Input
+                  label="N° de documento"
+                  type="text"
+                  placeholder=""
+                  className="inputPrimary"
+                  name="dni"
+                  value={formData.dni}
+                  onChange={handleChange}
+                  required
+                />
+
+                <InputSelect
+                  label="Tipo de documento"
+                  className="inputPrimary"
+                  name="typeDocument"
+                  value={formData.typeDocument}
+                  onChange={handleChange}
+                  data={DOCUMENTS_TYPE}
+                />
+
+                <div style={{ display: "flex" }}>
                   <Input
-                    label="N° de documento"
-                    type="text"
+                    ref={dataRef}
+                    label="Fecha de Nacimiento"
+                    type="date"
                     placeholder=""
                     className="inputPrimary"
-                    name="dni"
-                    value={formData.dni}
+                    name="birthdate"
+                    value={formData.birthdate}
+                    min="1936-04-26"
+                    max="2008-04-26"
                     onChange={handleChange}
                     required
                   />
-
-                  <InputSelect
-                    label="Tipo de documento"
-                    className="inputPrimary"
-                    name="typeDocument"
-                    value={formData.typeDocument}
-                    onChange={handleChange}
-                    data={DOCUMENTS_TYPE}
-                  />
-
-                  <div style={{ display: "flex" }}>
-                    <Input
-                      ref={dataRef}
-                      label="Fecha de Nacimiento"
-                      type="date"
-                      placeholder=""
-                      className="inputPrimary"
-                      name="birthdate"
-                      value={formData.birthdate}
-                      min="1936-04-26"
-                      max="2008-04-26"
-                      onChange={handleChange}
-                      required
-                    />
-                    <i className={`fa-regular fa-calendar-days ${styles.icon}`} onClick={openCalendar}
+                  <div className={`${styles.icon}`}>
+                    <i className={`fa-regular fa-calendar-days`} onClick={openCalendar}
                     ></i>
                   </div>
+                </div>
 
+                <Input
+                  label="Correo Electrónico"
+                  type="email"
+                  placeholder="hernan.c@gmail.com"
+                  className="inputPrimary"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+
+                <Input
+                  label="Teléfono"
+                  type="number"
+                  placeholder=""
+                  className="inputPrimary"
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                  required
+                />
+
+                <InputSelect
+                  label="País de nacimiento"
+                  className="inputPrimary"
+                  name="nationality"
+                  value={formData.nationality}
+                  onChange={handleChange}
+                  data={COUNTRIES}
+                />
+
+                <div style={{ display: "flex" }}>
                   <Input
-                    label="Correo Electrónico"
-                    type="email"
-                    placeholder="hernan.c@gmail.com"
-                    className="inputPrimary"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  <Input
-                    label="Teléfono"
-                    type="number"
-                    placeholder=""
-                    className="inputPrimary"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  <InputSelect
-                    label="País de nacimiento"
-                    className="inputPrimary"
-                    name="nationality"
-                    value={formData.nationality}
-                    onChange={handleChange}
-                    data={COUNTRIES}
-                  />
-
-                  <div style={{ display: "flex" }}>
-                    <Input
-                      label="Contraseña"
-                      type={!visible ? "password" : "text"}
-                      placeholder="**************"
-                      className="inputPrimary"
-                      name="password"
-                      value={formData.password}
-                      onChange={handleChange}
-                      required
-                    />
-                    <i className={`fa-solid fa-eye ${styles.icon}`}
-                      onClick={() => setVisible(!visible)}
-                    ></i>
-                  </div>
-
-                  <Input
-                    label="Confirme Contraseña"
+                    label="Contraseña"
                     type={!visible ? "password" : "text"}
                     placeholder="**************"
                     className="inputPrimary"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
+                    name="password"
+                    value={formData.password}
                     onChange={handleChange}
                     required
                   />
-
-
+                  <div className={`${styles.icon}`}>
+                    <i className={`fa-solid fa-eye`}
+                      onClick={() => setVisible(!visible)}
+                    ></i>
+                  </div>
                 </div>
+
+                <Input
+                  label="Confirme Contraseña"
+                  type={!visible ? "password" : "text"}
+                  placeholder="**************"
+                  className="inputPrimary"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+
+
+
 
                 <input type="checkbox" id="user-acept_terms" name="acceptedTerms" checked={formData.acceptedTerms} onChange={handleChange} /><span className={styles.spanStyle}>  Al continuar, aceptas los <Link to="/index" className={styles.link}>Términos y Condiciones</Link> y el <Link to="/index" className={styles.link} >Aviso de Privacidad</Link></span>
                 <Button className='btnRegister' text='Registrarse' type="submit" />

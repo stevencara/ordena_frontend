@@ -35,8 +35,6 @@ export const Hero = () => {
           paisa bien servida, aquí encuentras el verdadero gusto de nuestra tierra.</p>
         <Button text="Ver menú" className="btnLink" onClick={()=>navigate("/menu")} />
       </div>
-      <div className={styles.corpusImg}>
-      </div>
     </section>
   )
 }

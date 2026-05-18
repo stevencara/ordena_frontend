@@ -26,35 +26,23 @@ export const ViewOrders = () => {
     <div className="background">
 
       <div className="container">
-        <h1>Ver pedidos</h1>
-        <div className="contentFlex">
+        <div className='container-form'>
+          <h1>Ver pedidos</h1>
+          
+          <div className="container-flex">
 
-          {/* Modulo mesas*/}
-          <div className="module">
-            <OrderItem orders={orders} />
+            {/* Modulo mesas*/}
+            <div className="module">
+              <OrderItem orders={orders} />
+            </div>
+
+            {/* Modulo pedidos asociados a mesa*/}
+            <div className="module">
+
+              <CardOrder />
+            </div>
+
           </div>
-
-          {/* Modulo pedidos asociados a mesa*/}
-          <div className="module">
-            <form >
-              <fieldset className="formFlex">
-                <legend></legend>
-                <InputSelect
-                  label="Filtrar por"
-                  type="text"
-                  className="inputPrimary"
-                  placeholder=""
-                  onChange={(e) => setFilter(e.target.value)}
-                  data={FILTERS_BY}
-                />
-                <div className={styles.divFilter}>
-                  <button type='button' ><i className="fa-solid fa-filter" style={{ width: 25, height: 25 }}></i></button>
-                </div>
-              </fieldset>
-            </form>
-            <CardOrder />
-          </div>
-
         </div>
       </div>
     </div>

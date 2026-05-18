@@ -26,18 +26,18 @@ export const Suscribing = () => {
       setLoading(false)
     }, 2000)
 
-    console.log(formData)
+    console.log("El correo se ha suscrito: ", formData)
     setFormData("")
   }
 
   return (
-    <section className={styles.suscription}>
+    <section className={styles.section}>
       <h2 className={`${styles.title2} ${styles.suscriptionTitle}`}>Suscríbete</h2>
       <p className={styles.suscriptionParagraph}>Recibe noticias, promociones especiales y nuevos platos directamente en tu correo. Sé el primero en enterarte de nuestras novedades y disfruta beneficios exclusivos.</p>
       <div className={styles.formText}>
         <form onSubmit={handleSubmit} >
           <fieldset>
-            <legend></legend>
+            <legend>Datos personales</legend>
             <Input
               label="Correo"
               type="text"
@@ -48,7 +48,7 @@ export const Suscribing = () => {
               onChange={(e) => setFormData(e.target.value)}
               variant="Light"
             />
-            <Button text="Suscribirse" className="btnLink" type="submit" />
+            <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}><Button text="Suscribirse" className="btnLink" type="submit" /></div>
           </fieldset>
         </form>
         {loading && <Loader />}

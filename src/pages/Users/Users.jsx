@@ -119,182 +119,187 @@ export const Users = () => {
   return (
     <div className="background">
       <div className="container">
-        <h1>Usuarios</h1>
+        <div className="container-form">
+          <div className="container-flex">
+            <h1>Usuarios</h1>
 
-        <form >
-          <fieldset className="formFlex">
-            <legend></legend>
-            <Input
-              label="Buscar"
-              type="text"
-              placeholder=""
-              className="inputPrimary"
-              name="userName"
-              value={user}
-              onChange={(e) => setUser(e.target.value)}
-              required
-            />
-
-            <div className={styles.divSearch}>
-              <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
-            </div>
-
-            <InputSelect
-              label="Filtrar por:"
-              type="text"
-              className="inputPrimary"
-              name="userType"
-              value={userType}
-              placeholder=""
-              onChange={(e) => setUserType(e.target.value)}
-              data={USERS_TYPE}
-            />
-          </fieldset>
-        </form>
-
-        <div className="contentFlex">
-          {/* Modulo Usuarios */}
-          <div className="module">
-            <UserItem users={usersFiltered} />
-          </div>
-
-          {/* Modulo Formulario Nuevo Usuario*/}
-          <div className="module">
-            {loading ? <Loader /> : (<form onSubmit={handleSubmit}>
-              <fieldset>
+            <form >
+              <fieldset className="form-flex">
                 <legend></legend>
+                <Input
+                  label="Buscar"
+                  type="text"
+                  placeholder=""
+                  className="inputPrimary"
+                  name="userName"
+                  value={user}
+                  onChange={(e) => setUser(e.target.value)}
+                  required
+                />
 
-                <h2>Usuario</h2>
-                <div className={styles.displayForm}>
-                  <Input
-                    label="Nombres"
-                    type="text"
-                    placeholder=""
-                    className="inputPrimary"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  <Input
-                    label="Apellidos"
-                    type="text"
-                    placeholder=""
-                    className="inputPrimary"
-                    name="lastname"
-                    value={formData.lastname}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  <Input
-                    label="N° de documento"
-                    type="text"
-                    placeholder=""
-                    className="inputPrimary"
-                    name="dni"
-                    value={formData.dni}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  <InputSelect
-                    label="Tipo de documento"
-                    className="inputPrimary"
-                    name="typeDocument"
-                    value={formData.typeDocument}
-                    onChange={handleChange}
-                    data={DOCUMENTS_TYPE}
-                  />
-
-                  <div style={{ display: "flex" }}>
-                    <Input
-                      ref={dataRef}
-                      label="Fecha de Nacimiento"
-                      type="date"
-                      placeholder=""
-                      className="inputPrimary"
-                      name="birthdate"
-                      value={formData.birthdate}
-                      min="1936-04-26"
-                      max="2008-04-26"
-                      onChange={handleChange}
-                      required
-                    />
-                    <i className={`fa-regular fa-calendar-days ${styles.icon}`} onClick={openCalendar}
-                    ></i>
-                  </div>
-
-                  <Input
-                    label="Correo Electrónico"
-                    type="email"
-                    placeholder=""
-                    className="inputPrimary"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  <Input
-                    label="Teléfono"
-                    type="number"
-                    placeholder=""
-                    className="inputPrimary"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  <InputSelect
-                    label="País de nacimiento"
-                    className="inputPrimary"
-                    name="nationality"
-                    value={formData.nationality}
-                    onChange={handleChange}
-                    data={COUNTRIES}
-                  />
-
-                  <div style={{ display: "flex" }}>
-                    <Input
-                      label="Contraseña"
-                      type={!visible ? "password" : "text"}
-                      placeholder="**************"
-                      className="inputPrimary"
-                      name="password"
-                      value={formData.password}
-                      onChange={handleChange}
-                      required
-                    />
-                    <i className={`fa-solid fa-eye ${styles.icon}`}
-                      onClick={() => setVisible(!visible)}
-                    ></i>
-                  </div>
-
-                  <Input
-                    label="Confirme Contraseña"
-                    type={!visible ? "password" : "text"}
-                    placeholder="**************"
-                    className="inputPrimary"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  <div className={styles.divActionsOrder}>
-                    <Button text='Eliminar' className='btnDelete' />
-                    <Button text='Añadir' className='btnAdd' type='submit' />
-                  </div>
-
+                <div className={styles.divSearch}>
+                  <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
                 </div>
 
+                <InputSelect
+                  label="Filtrar por:"
+                  type="text"
+                  className="inputPrimary"
+                  name="userType"
+                  value={userType}
+                  placeholder=""
+                  onChange={(e) => setUserType(e.target.value)}
+                  data={USERS_TYPE}
+                />
               </fieldset>
-            </form>)}
-          </div>
+            </form>
 
+            <div className="container-flex">
+              {/* Modulo Usuarios */}
+              <div className="module">
+                <UserItem users={usersFiltered} />
+              </div>
+
+              {/* Modulo Formulario Nuevo Usuario*/}
+              <div className="module">
+                {loading ? <Loader /> : (<form onSubmit={handleSubmit}>
+                  <fieldset>
+                    <legend></legend>
+
+                    <h2>Usuario</h2>
+                    <div className={styles.displayForm}>
+                      <Input
+                        label="Nombres"
+                        type="text"
+                        placeholder=""
+                        className="inputPrimary"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                      />
+
+                      <Input
+                        label="Apellidos"
+                        type="text"
+                        placeholder=""
+                        className="inputPrimary"
+                        name="lastname"
+                        value={formData.lastname}
+                        onChange={handleChange}
+                        required
+                      />
+
+                      <Input
+                        label="N° de documento"
+                        type="text"
+                        placeholder=""
+                        className="inputPrimary"
+                        name="dni"
+                        value={formData.dni}
+                        onChange={handleChange}
+                        required
+                      />
+
+                      <InputSelect
+                        label="Tipo de documento"
+                        className="inputPrimary"
+                        name="typeDocument"
+                        value={formData.typeDocument}
+                        onChange={handleChange}
+                        data={DOCUMENTS_TYPE}
+                      />
+
+                      <div style={{ display: "flex" }}>
+                        <Input
+                          ref={dataRef}
+                          label="Fecha de Nacimiento"
+                          type="date"
+                          placeholder=""
+                          className="inputPrimary"
+                          name="birthdate"
+                          value={formData.birthdate}
+                          min="1936-04-26"
+                          max="2008-04-26"
+                          onChange={handleChange}
+                          required
+                        />
+                        <i className={`fa-regular fa-calendar-days ${styles.icon}`} onClick={openCalendar}
+                        ></i>
+                      </div>
+
+                      <Input
+                        label="Correo Electrónico"
+                        type="email"
+                        placeholder=""
+                        className="inputPrimary"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                      />
+
+                      <Input
+                        label="Teléfono"
+                        type="number"
+                        placeholder=""
+                        className="inputPrimary"
+                        name="phoneNumber"
+                        value={formData.phoneNumber}
+                        onChange={handleChange}
+                        required
+                      />
+
+                      <InputSelect
+                        label="País de nacimiento"
+                        className="inputPrimary"
+                        name="nationality"
+                        value={formData.nationality}
+                        onChange={handleChange}
+                        data={COUNTRIES}
+                      />
+
+                      <div style={{ display: "flex" }}>
+                        <Input
+                          label="Contraseña"
+                          type={!visible ? "password" : "text"}
+                          placeholder="**************"
+                          className="inputPrimary"
+                          name="password"
+                          value={formData.password}
+                          onChange={handleChange}
+                          required
+                        />
+                        <i className={`fa-solid fa-eye ${styles.icon}`}
+                          onClick={() => setVisible(!visible)}
+                        ></i>
+                      </div>
+
+                      <Input
+                        label="Confirme Contraseña"
+                        type={!visible ? "password" : "text"}
+                        placeholder="**************"
+                        className="inputPrimary"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        required
+                      />
+
+                      <div className={styles.divActionsOrder}>
+                        <Button text='Eliminar' className='btnDelete' />
+                        <Button text='Añadir' className='btnAdd' type='submit' />
+                      </div>
+
+                    </div>
+
+                  </fieldset>
+                </form>)}
+              </div>
+
+            </div>
+
+          </div>
         </div>
 
       </div>

@@ -69,120 +69,122 @@ export const Orders = () => {
   return (
     <div className="background">
       <div className="container">
-        <h1>Creá un pedido</h1>
+        <div className="container-form">
+          <h1>Creá un pedido</h1>
 
-        <div className="contentFlex">
-          <div className="module">
-            {/* FORMULARIO DE BÚSQUEDA*/}
-            <form >
-              <fieldset className="formFlex">
-                <legend></legend>
-
-                <Input
-                  label="N° de mesa"
-                  type="number"
-                  className="inputPrimary"
-                  placeholder=""
-                  name="numberTable"
-                  value={table}
-                  onChange={(e) => setTable(e.target.value)}
-                  required
-                  variant='dark'
-                />
-
-                <Input
-                  label="N° de pedido"
-                  type="number"
-                  className="inputPrimary"
-                  placeholder=""
-                  name="numberOrder"
-                  value={order}
-                  onChange={(e) => setOrder(e.target.value)}
-                  required
-                  variant='dark'
-                />
-
-                <div className={styles.divSearch}>
-                  <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
-                </div>
-              </fieldset>
-            </form>
-
-            {/* FORMULARIO DE NUEVA ORDEN*/}
-            <form onSubmit={handleSubmit} >
-              <fieldset>
-                <h2>Añadí a tu pedido</h2>
-                <div className={styles.displayForm}>
-
-                  <InputSelect
-                    label="Tipo de comida"
-                    type="text"
-                    className="inputPrimary"
-                    name="typeProduct"
-                    value={formData.typeProduct}
-                    placeholder=""
-                    onChange={handleChange}
-                    data={PLATES_TYPE}
-                  />
+          <div className="container-flex">
+            <div className="module">
+              {/* FORMULARIO DE BÚSQUEDA*/}
+              <form >
+                <fieldset className="form-flex">
+                  <legend></legend>
 
                   <Input
-                    label="Platillo"
-                    type="text"
-                    maxLength="50"
-                    className="inputPrimary"
-                    placeholder="Elegí el platillo"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    variant='dark'
-                  />
-
-                  <Input
-                    label="Cantidad"
+                    label="N° de mesa"
                     type="number"
-                    min="1"
-                    max="30"
                     className="inputPrimary"
-                    placeholder="Elegí el platillo"
-                    name="quantity"
-                    value={formData.quantity}
-                    onChange={handleChange}
+                    placeholder=""
+                    name="numberTable"
+                    value={table}
+                    onChange={(e) => setTable(e.target.value)}
                     required
                     variant='dark'
                   />
 
                   <Input
-                    label="Observación"
-                    type="0"
+                    label="N° de pedido"
+                    type="number"
                     className="inputPrimary"
-                    placeholder="Ingrese alguna nota relevante sobre el pedido..."
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChange}
+                    placeholder=""
+                    name="numberOrder"
+                    value={order}
+                    onChange={(e) => setOrder(e.target.value)}
                     required
                     variant='dark'
                   />
 
+                  <div className={styles.divSearch}>
+                    <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
+                  </div>
+                </fieldset>
+              </form>
 
-                  <div className={styles.divActionsOrder}>
-                    <Button text="Atrás" className="btnBack" />
-                    <Button text='Añadir' className='btnAdd' type='submit' />
+              {/* FORMULARIO DE NUEVA ORDEN*/}
+              <form onSubmit={handleSubmit} >
+                <fieldset>
+                  <h2>Añadí a tu pedido</h2>
+                  <div className={styles.displayForm}>
+
+                    <InputSelect
+                      label="Tipo de comida"
+                      type="text"
+                      className="inputPrimary"
+                      name="typeProduct"
+                      value={formData.typeProduct}
+                      placeholder=""
+                      onChange={handleChange}
+                      data={PLATES_TYPE}
+                    />
+
+                    <Input
+                      label="Platillo"
+                      type="text"
+                      maxLength="50"
+                      className="inputPrimary"
+                      placeholder="Elegí el platillo"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      variant='dark'
+                    />
+
+                    <Input
+                      label="Cantidad"
+                      type="number"
+                      min="1"
+                      max="30"
+                      className="inputPrimary"
+                      placeholder="Elegí el platillo"
+                      name="quantity"
+                      value={formData.quantity}
+                      onChange={handleChange}
+                      required
+                      variant='dark'
+                    />
+
+                    <Input
+                      label="Observación"
+                      type="0"
+                      className="inputPrimary"
+                      placeholder="Ingrese alguna nota relevante sobre el pedido..."
+                      name="description"
+                      value={formData.description}
+                      onChange={handleChange}
+                      required
+                      variant='dark'
+                    />
+
+
+                    <div className={styles.divActionsOrder}>
+                      <Button text="Atrás" className="btnBack" />
+                      <Button text='Añadir' className='btnAdd' type='submit' />
+                    </div>
+
                   </div>
 
-                </div>
+                </fieldset>
+              </form>
 
-              </fieldset>
-            </form>
+              {loading && <Loader />}
+            </div>
 
-            {loading && <Loader />}
+            {/* MODULO DETALLE PEDIDO*/}
+            <div className="module">
+              <CardOrder products={products} setProducts={setProducts} />
+            </div>
+
           </div>
-
-          {/* MODULO DETALLE PEDIDO*/}
-          <div className="module">
-            <CardOrder products={products} setProducts={setProducts} />
-          </div>
-
         </div>
       </div>
     </div>

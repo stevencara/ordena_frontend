@@ -1,42 +1,78 @@
 /* NUEVO FOOTER */
 
-.footer{
-  width: 100%;
-  background-color: rgb(32, 32, 32);
-  color: white;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  width: 100%;
-  padding-top: 15px;
-  position: static;
-  bottom: 0;
-  text-align: center;
-  font-size: 0.7rem;
+.footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  padding: 15px 5%;
+  padding-bottom: 10px;
+  bottom: 0;
+  background-color: rgb(32, 32, 32);
+  color: white;
+  position: static;
+  text-align: center;
+  font-size: 0.7rem;
 }
 
-.footerContain{
-  width: 1000px;
-  display: flex;
+.footerContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  width: 100%;
   margin-bottom: 30px;
 }
 
-.footerContainDiv{
-  margin: 0 20px;
-  width: 200px;
+.footerContainerDiv {
+  margin: 0;
+  width: 100%;
+  min-height: 130px;
+  padding: 0 10px 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+.footerContainerDiv h3 {
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 .icon {
   color: white;
   width: 28px;
-  height: 100%;
+  height: 10px;
   display: flex;
   flex-direction: row;
   text-align: center;
   align-content: center;
   font-size: 24px;
   cursor: pointer;
+}
+
+
+/* ============================================
+   DESKTOP: 1024px y más
+   ============================================ */
+@media (min-width: 1024px) {
+  .footerContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .footerContainerDiv {
+    margin: 0;
+    width: 100%;
+    min-height: 130px;
+    padding: 0 25% 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+  }
+
+
+
+
 }

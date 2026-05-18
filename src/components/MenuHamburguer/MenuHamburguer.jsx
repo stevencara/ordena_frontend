@@ -24,10 +24,12 @@ export const MenuHamburguer = () => {
 
 
   return (
-    <div style={{ display: "block", width: "100%", height: "100%" }}>
-      <i className={`fa-solid fa-bars ${styles.icon}`}
-        onClick={toggleMenu}
-      ></i>
+    <div style={{ display: "flex", width: "100%", height: "100%" }}>
+      <div className={styles.icon}>
+        <i className={`fa-solid fa-bars `}
+          onClick={toggleMenu}
+        ></i>
+      </div>
       <div className={`${styles.menu} ${isOpen ? styles.open : ""} `}>
         <div style={{ display: "flex", justifyContent: "flex-end", padding: "10px" }}>
           <i className={"fa-solid fa-xmark"} style={{ color: "white", fontSize: "24px", width: 32, height: 32 }} onClick={toggleMenu}></i>

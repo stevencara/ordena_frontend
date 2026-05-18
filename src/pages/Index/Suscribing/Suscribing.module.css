@@ -1,4 +1,3 @@
-
 /* ESTILOS SECCION SUSCRIPCION */
 .title2 {
   font-family: "Pacifico", cursive;
@@ -7,15 +6,15 @@
   margin: 20px 0;
 }
 
-.suscription {
+.section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 0 10%;
-  margin: 0 0 100px;
-  height: 700px;
+  padding: 0 5%;
+  margin-bottom: 20px;
+  height: auto;
   background-color: rgb(245, 245, 245);
 }
 
@@ -24,16 +23,42 @@
 }
 
 .suscriptionParagraph {
-  font-size: 20px;
+  font-size: var(--font-size-sm);
   text-align: center;
-  width: 800px;
+  width: 100%;
+  color: var(--color-text-dark);
 }
 
 .formText {
   margin-top: 10px;
+  width: 100%;
 }
 
 .formTextInput {
   border: 1px solid rgb(179, 179, 179);
   height: 30px;
+}
+
+
+
+/* ============================================
+   DESKTOP: 1024px y más
+   ============================================ */
+
+@media (min-width: 1024px) {
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 30%;
+    margin-bottom: 20px;
+    height: auto;
+    background-color: rgb(245, 245, 245);
+  }
+
+
 }

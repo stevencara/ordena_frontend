@@ -1,23 +1,7 @@
-.contentRegister {
-  display: flex;
-  justify-content: end;
-  width: 100%;
-}
-
-.formRegister {
-  width: 60%;
-  background-color: black;
-  opacity: 0.90;
-  border-radius: 10px;
-  padding: 2% 5% 2% 5%;
-  margin: 35px 0 35px 0;
-}
 
 .title {
   text-align: start;
 }
-
-
 
 .spanStyle {
   color: white;
@@ -38,24 +22,17 @@
   margin: 15px 0 15px 0;
 }
 
-.displayForm{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5px;
-}
-
 
 .icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: end;
   color: white;
   width: 28px;
-  height: 100%;
-  display: flex;
-  text-align: center;
-  align-content: center;
-  font-size: 24px;
+  height: auto;
+  font-size: var(--font-size-2xl);
   cursor: pointer;
   margin-left: 3px;
+  padding-bottom: var(--space-4);
 }
-
-
-

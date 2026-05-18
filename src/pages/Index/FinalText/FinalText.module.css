@@ -1,4 +1,3 @@
-
 /* ESTILOS SECCION BANER DE PRESENTACION */
 .title2 {
   font-family: "Pacifico", cursive;
@@ -14,26 +13,46 @@
   margin: 0px 0;
 }
 
-.finalTxt {
+.section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 0 100px;
-  padding: 0 10%;
-  height: 700px;
+  margin-bottom: 20px;
+  padding: 10px 5%;
+  height: auto;
   background-image: linear-gradient(rgba(255, 251, 0, 0.9), rgba(255, 251, 0, 0.9)), url("../../assets/img5.jpg");
   background-size: cover;
   background-position: center;
 }
 
 .finalTxtParagraph {
-  width: 600px;
+  width: 100%;
   text-align: center;
-  font-size: 25px;
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
 }
 
 .finalTxtTitle {
   color: black;
 }
 
+
+
+
+@media (min-width: 1024px) {
+  .section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px 5%;
+    min-height: 300px;
+    background-image: linear-gradient(rgba(255, 251, 0, 0.9), rgba(255, 251, 0, 0.9)), url("../../assets/img5.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+
+
+}

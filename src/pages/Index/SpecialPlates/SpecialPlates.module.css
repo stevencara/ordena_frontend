@@ -1,101 +1,117 @@
 /* ESTILOS SECCION PLATOS EJECUTIVOS */
 
 .title2 {
-    font-family: "Pacifico", cursive;
-    font-size: 50px;
-    text-align: center;
-    margin: 20px 0;
+  font-family: "Pacifico", cursive;
+  font-size: 50px;
+  text-align: center;
+  margin: 20px 0;
 }
 
 .title3 {
-    font-family: "Pacifico", cursive;
-    font-size: 36px;
-    text-align: center;
-    margin: 0px 0;
+  font-family: "Pacifico", cursive;
+  font-size: 36px;
+  text-align: center;
+  margin: 0px 0;
 }
 
-.presentation {
+.section {
+    width: 100%;
+    padding: 0 5%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(89, 34, 14);
+    align-items: center;
+}
+
+.menuTitle {
+    color: rgb(245, 245, 245);
+}
+
+.menuParagraph {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: var(--font-size-base);
+}
+
+.platillos {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: auto;
-    margin: 0 0 100px;
-    padding: 0 10% 0;
-    background-color: rgb(89, 34, 14);
-}
-
-.presentationTitle {
-    color: rgb(255, 174, 0);
+    gap: 15px;
+    margin-bottom: 30px;
 }
 
 
-.presentationInterno {
-    display: flex;
-    width: 1200px;
-    margin-bottom: 10%;
-}
-
-.imgPresentation {
-    width: 50%;
-    height: 500px;
-    display: flex;
-    justify-content: center;
-}
-
-.txtPresentation {
-    width: 50%;
-    padding: 30px;
+.platos {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 500px;
+    align-items: center;
 }
 
-.txtPresentationTitle {
-    color: rgb(255, 174, 0);
+.platilloTitle{
+    font-size: var(--font-size-xl);
 }
 
-.txtPresentationParagraph {
-    margin-top: 20px;
-    width: 500px;
-    color: white;
+
+.platosParagraph {
+    text-align: center;
+    justify-content: space-around;
+    font-size: var(--font-size-xs);
 }
 
-.txtPresentationButton {
-    font-size: 15px;
-    font-weight: 800;
-    border-color: transparent;
-    margin-top: 20px;
-    width: 200px;
-    padding: 20px;
-    color: black;
-    background-color: rgb(255, 174, 0);
-}
-
-.imgPlato {
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-}
-
-.uno {
+.img1 {
     background-image: url("../../../assets/img4.avif");
     background-size: cover;
     background-position: center;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    margin-bottom: 20px;
     box-shadow: 2px 10px 20px #000;
 }
 
-.dos {
+.img2 {
     background-image: url("../../../assets/img5.jpeg");
     background-size: cover;
     background-position: center;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    margin-bottom: 20px;
     box-shadow: 2px 10px 20px #000;
 }
 
-.uno:hover,
-.dos:hover {
+
+.img1:hover,
+.img2:hover,
+.img3:hover {
     transform: scale(1.1);
     transition: 0.2s;
+}
+
+
+
+/* ============================================
+   DESKTOP: 1024px y más
+   ============================================ */
+
+   @media (min-width: 1024px) {
+    .platillos {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+
+
+
 }

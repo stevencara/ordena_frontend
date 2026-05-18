@@ -18,18 +18,14 @@
   width: 100%;
 }
 
-.labelBase {
-  font-size: 0.7rem;
-  color: black;
+.label {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-base);
+  margin-bottom: var(--space-8);
 }
 
-.labelLight {
-  color: white;
-}
-
-.labelDark {
-  color: black;
-}
+.labelLight { color: white }
+.labelDark { color: black }
 
 
 .inputDescription {

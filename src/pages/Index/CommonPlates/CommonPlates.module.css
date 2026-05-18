@@ -1,22 +1,22 @@
 /* ESTILOS SECCION PLATOS CLÁSICOS*/
 .title2 {
-  font-family: "Pacifico", cursive;
-  font-size: 50px;
-  text-align: center;
-  margin: 20px 0;
+    font-family: "Pacifico", cursive;
+    font-size: 50px;
+    text-align: center;
+    margin: 20px 0;
 }
 
 .title3 {
-  font-family: "Pacifico", cursive;
-  font-size: 36px;
-  text-align: center;
-  margin: 0px 0;
+    font-family: "Pacifico", cursive;
+    font-size: 36px;
+    text-align: center;
+    margin: 0px 0;
 }
 
 .menu {
     width: 100%;
-    padding: 0 10%;
-    margin: 0 0 100px;
+    padding: 0 5%;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     background-color: rgb(166, 43, 15);
@@ -28,15 +28,17 @@
 }
 
 .menuParagraph {
-    width: 600px;
+    width: 100%;
     text-align: center;
     margin-bottom: 60px;
-    font-size: 20px;
+    font-size: var(--font-size-base);
 }
 
 .platillos {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 100%;
     gap: 15px;
     margin-bottom: 30px;
@@ -50,10 +52,15 @@
     align-items: center;
 }
 
+.platilloTitle {
+    font-size: var(--font-size-xl);
+}
+
 
 .platosParagraph {
     text-align: center;
     justify-content: space-around;
+    font-size: var(--font-size-xs);
 }
 
 .img1 {
@@ -94,4 +101,25 @@
 .img3:hover {
     transform: scale(1.1);
     transition: 0.2s;
+}
+
+
+/* ============================================
+   DESKTOP: 1024px y más
+   ============================================ */
+   
+@media (min-width: 1024px) {
+    .platillos {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+
+
+
 }

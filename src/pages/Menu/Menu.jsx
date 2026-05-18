@@ -64,7 +64,7 @@ export const Menu = () => {
     const matchesSearch = p.name.toLowerCase().includes(productSearched.toLowerCase())
     return matchesCategory && matchesSearch
   })
- 
+
 
   // ENVIAR DATOS DE FORMULARIO CREACION DE PRODUCTO
   const handleSubmit = (e) => {
@@ -74,41 +74,44 @@ export const Menu = () => {
   return (
     <div className="background">
       <div className="container">
-        <h1>Menú</h1>
+        <div className='container-form'>
+          <h1>Menú</h1>
 
-        <form onSubmit={handleSubmit}>
-          <fieldset className="formFlex">
-            <legend></legend>
-            <Input
-              label="Buscar"
-              type="text"
-              className="inputPrimary"
-              placeholder=""
-              name="productName"
-              value={productSearched}
-              onChange={(e) => setProductSearched(e.target.value)}
-              variant='dark'
-            />
+          <form onSubmit={handleSubmit}>
+            <fieldset className="form-flex">
+              <legend></legend>
+              <Input
+                label="Buscar"
+                type="text"
+                className="inputPrimary"
+                placeholder=""
+                name="productName"
+                value={productSearched}
+                onChange={(e) => setProductSearched(e.target.value)}
+                variant='dark'
+              />
 
-            <div className={styles.divSearch}>
-              <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "25px", textAlign: "center", cursor: "pointer" }}></i></button>
+              <div className={styles.divSearch}>
+                <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "25px", textAlign: "center", cursor: "pointer" }}></i></button>
+              </div>
+
+            </fieldset>
+          </form>
+
+          <ScrollMenu onSetPlateType={setPlateType} />
+
+          {loading ? <Loader /> : (
+            <div className="container-flex">
+              {/* Modulo Platillos*/}
+              <div className={styles.gridPlates}>
+                <MenuItem products={filteredList} />
+              </div>
+
             </div>
+          )}
 
-          </fieldset>
-        </form>
 
-        <ScrollMenu onSetPlateType={setPlateType} />
-
-        {loading ? <Loader /> : (
-          <div className="contentFlex">
-            {/* Modulo Platillos*/}
-            <div className={styles.gridPlates}>
-              <MenuItem products={filteredList} />
-            </div>
-
-          </div>
-        )}
-
+        </div>
 
 
       </div>

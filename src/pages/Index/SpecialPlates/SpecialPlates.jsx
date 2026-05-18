@@ -5,34 +5,38 @@ import { Button } from "../../../components/Button/Button"
 export const SpecialPlates = () => {
 
   return (
-    <section className={styles.presentation}>
-      <h2 className={`${styles.title2} ${styles.presentationTitle}`}>Carta ejecutiva</h2>
+    <>
+      <section className={styles.section}>
+        <h2 className={`${styles.title2} ${styles.menuTitle}`}>Carta ejecutiva</h2>
+        <p className={styles.menuParagraph}>Una selección de los platos más representativos de Colombia, preparados
+          con ingredientes frescos y recetas tradicionales que conservan el sabor
+          auténtico de cada región.</p>
 
-      <article className={styles.presentationInterno}>
-        <div className={styles.imgPresentation}>
-          <div className={`${styles.imgPlato} ${styles.uno}`}></div>
-        </div>
+        <div className={styles.platillos}>
 
-        <div className={styles.txtPresentation}>
-          <h3 className={`${styles.title3} ${styles.txtPresentationTitle}`}>Sobrebarriga en Salsa</h3><br />
-          <h3 className={`${styles.title3} ${styles.txtPresentationTitle}`}>$ 32.000</h3>
-          <p className={styles.txtPresentationParagraph}>Tierna sobrebarriga cocinada lentamente en salsa criolla, acompañada de arroz blanco, papa salada y ensalada fresca. Un clásico lleno de sabor.</p>
-          {/* <Button text="Ordenar pedido" className="btnLink" /> */}
-        </div>
-      </article>
+          <article className={styles.platos}>
+            <h3 className={styles.platilloTitle}>Sobrebarriga en Salsa</h3><h3>$ 25.900</h3>
+            <div className={`${styles.img1}`}></div>
+            <p className={styles.platosParagraph}>Tierna sobrebarriga cocinada lentamente en salsa criolla, acompañada de arroz blanco, papa salada y ensalada fresca. Un clásico lleno de sabor.</p>
+            {/* <Button text="Ordenar pedido" className="btnLink" /> */}
+          </article>
 
-      <article className={styles.presentationInterno}>
-        <div className={styles.imgPresentation}>
-          <div className={`${styles.imgPlato} ${styles.dos}`}></div>
-        </div>
+          <article className={styles.platos}>
+            <h3 className={styles.platilloTitle}>Mojarra Frita</h3><h3>$ 32.000</h3>
+            <div className={`${styles.img2}`}></div>
+            <p className={styles.platosParagraph}>Mojarra fresca frita al punto perfecto, acompañada de arroz con coco, patacones y ensalada. Un plato típico de la costa caribe colombiana.</p>
+            {/* <Button text="Ordenar pedido" className="btnLink" /> */}
+          </article>
 
-        <div className={styles.txtPresentation}>
-          <h3 className={`${styles.title3} ${styles.txtPresentationTitle}`}>Mojarra Frita</h3><br />
-          <h3 className={`${styles.title3} ${styles.txtPresentationTitle}`}>$ 32.000</h3>
-          <p className={styles.txtPresentationParagraph}>Mojarra fresca frita al punto perfecto, acompañada de arroz con coco, patacones y ensalada. Un plato típico de la costa caribe colombiana.</p>
-          {/*  <Button text="Ordenar pedido" className="btnLink" /> */}
+          <article className={styles.platos}>
+            <h3 className={styles.platilloTitle}>Baby Beef</h3><h3>$ 40.000</h3>
+            <div className={`${styles.img2}`}></div>
+            <p className={styles.platosParagraph}>Mojarra fresca frita al punto perfecto, acompañada de arroz con coco, patacones y ensalada. Un plato típico de la costa caribe colombiana.</p>
+            {/* <Button text="Ordenar pedido" className="btnLink" /> */}
+          </article>
+
         </div>
-      </article>
-    </section>
+      </section>
+    </>
   )
 }

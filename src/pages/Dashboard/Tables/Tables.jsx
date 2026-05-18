@@ -20,7 +20,7 @@ export const Tables = () => {
   return (
     <div>
       <form>
-        <fieldset className="formFlex">
+        <fieldset className="form-flex">
           <legend></legend>
           <Input
             label="N° de mesa"

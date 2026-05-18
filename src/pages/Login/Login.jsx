@@ -59,12 +59,12 @@ export const Login = () => {
   return (
     <>
       <div className="background">
-        <div className={styles.contentLogin}>
-          <div className={styles.formLogin}>
+        <div className="container">
+          <div className="container-form">
 
             <h1>Iniciar Sesión</h1>
             <fieldset>
-              <legend></legend>
+              <legend>Datos</legend>
               <form action="" onSubmit={handleSubmit}>
                 <Input
                   label="Correo Electrónico"
