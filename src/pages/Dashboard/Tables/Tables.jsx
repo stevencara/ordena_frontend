@@ -15,7 +15,7 @@ export const Tables = () => {
       .then(result => {
         setTables(result)
       })
-  })
+  },[])
 
   return (
     <div>

@@ -19,7 +19,7 @@ export const Input = forwardRef(({
 
   return (
     <div className={styles.inputContainer}>
-      <label className={`${styles.label} ${labelStyle}`} for={label} >{label}
+      <label className={`${styles.label} ${labelStyle}`} htmlFor={label} >{label}
       </label>
         <input
           ref={ref}
@@ -52,7 +52,7 @@ export const InputSelect = ({
 
   return (
     <div className={styles.inputContainer}>
-      <label className={`${styles.label} ${labelStyle}`} for={label} >{label}
+      <label className={`${styles.label} ${labelStyle}`} htmlFor={label} >{label}
         <select
            className={`${styles.input} ${styles[className]}`}
           name={name}
