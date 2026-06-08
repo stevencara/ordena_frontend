@@ -1,5 +1,7 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
+
+// Servicio para obtener todos los productos
 export const getProducts = async () => {
   const response = await fetch(
     `${API_URL}/products`
@@ -14,13 +16,12 @@ export const getProducts = async () => {
 };
 
 
-
+// Servicio para crear un producto
 export const createProduct = async (product) => {
   const response = await fetch(`${API_URL}/products`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-    
     },
     body: JSON.stringify(product),
   });
@@ -33,7 +34,25 @@ export const createProduct = async (product) => {
 };
 
 
+// Servicio para actualizar un producto
+export const updateProduct = async (id, product) => {
+  const response = await fetch(`${API_URL}/products/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(product),
+  });
 
+  if (!response.ok) {
+    throw new Error("Error actualizando producto");
+  }
+
+  return response.json();
+};
+
+
+// Servicio para eliminar un producto
 export const deleteProduct = async (id) => {
   console.log(id)
   const response = await fetch(`${API_URL}/products/${id}`, {
