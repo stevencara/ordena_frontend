@@ -8,7 +8,7 @@ export const getProducts = async () => {
   );
 
   if (!response.ok) {
-    throw new Error("Error en API");
+    throw new Error("Error obteniendo productos en API");
   }
 
   return response.json();
@@ -27,7 +27,7 @@ export const createProduct = async (product) => {
   });
 
   if (!response.ok) {
-    throw new Error("Error creando producto");
+    throw new Error("Error creando un producto");
   }
 
   return response.json();
@@ -45,7 +45,7 @@ export const updateProduct = async (id, product) => {
   });
 
   if (!response.ok) {
-    throw new Error("Error actualizando producto");
+    throw new Error("Error actualizando un producto");
   }
 
   return response.json();
@@ -60,6 +60,6 @@ export const deleteProduct = async (id) => {
   });
 
   if (!response.ok) {
-    throw new Error("Error eliminando producto");
+    throw new Error("Error eliminando un producto");
   }
 }

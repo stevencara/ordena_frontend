@@ -1,51 +1,102 @@
+import { useUsers } from "../../hooks/useUsers";
 import { Button } from '../../components/Button/Button'
-import { Input, InputSelect } from '../../components/Input/Input'
 import { UserItem } from './UserItem/UserItem'
-import styles from './Users.module.css'
-import { useEffect, useRef, useState } from 'react'
-import { USERS_TYPE, DOCUMENTS_TYPE, COUNTRIES } from "../../data/options.js"
-import { Loader } from '../../components/Loader/Loader.jsx'
+import { useState } from 'react'
+import { Loader } from '../../components/Loader/Loader'
+import { UserFilters } from "./UserFilters.jsx";
+import { UserEditForm } from "./UserEditForm.jsx";
+import { UserCreateModal } from "./UserCreateModal.jsx";
+import { UserDeleteModal } from "./UserDeleteModal.jsx";
+
+
 
 export const Users = () => {
-  const [users, setUsers] = useState([]);
-  const [userSearched, setUserSearched] = useState("")
-  const [visible, setVisible] = useState(false)
-  const [loading, setLoading] = useState(false)
+
+  const [userSearch, setUserSearch] = useState("")
+  const [openModal, setOpenModal] = useState(false); // Modal para Crear
+  const [openDeleteModal, setOpenDeleteModal] = useState(false); // Modal para Eliminar  
+
   const [userType, setUserType] = useState("Todos")
+  const [editingId, setEditingId] = useState(null);
+
+  const {
+    users,
+    loading,
+    addUser,
+    editUser,
+    removeUser
+  } = useUsers();
+
+
+  // ESTADO FORMULARIO DETALLE / EDICIÓN (PATCH)
   const [formData, setFormData] = useState({
+    id: "",
     name: "",
     lastname: "",
     dni: "",
     typeDocument: "",
-    birthdate: "",
     email: "",
-    phoneNumber: "",
-    nationality: "",
     password: "",
+    phone: "",
+    role: "",
+    nationality: "",
+    image: "",
+    active: true,
+    birthdate: "",
     confirmPassword: ""
   })
 
-  // API GET: OBTENER DATOS DE USUARIOS
-  useEffect(() => {
-    fetch('/api/users.json')
-      .then(response => response.json())
-      .then(result => {
-        setUsers(result)
-      })
-      .catch(error => console.log("Error cargando archivo: ", error))
-  }, [users])
+  // ESTADO FORMULARIO CREACIÓN (POST)
+  const [createFormData, setCreateFormData] = useState({
+    name: "",
+    lastname: "",
+    dni: "",
+    typeDocument: "",
+    email: "",
+    password: "",
+    phone: "",
+    role: "",
+    nationality: "",
+    image: "",
+    active: true,
+    birthdate: "",
+    confirmPassword: ""
+  });
 
-  
+
+
   // Combinar filtro de categoría y el de búsqueda por nombre
   const usersFiltered = users.filter((u) => {
     const matchesCategory = userType === "Todos" || u.role.toLowerCase() === userType.toLowerCase();
-    const matchesSearch = u.name.toLowerCase().includes(userSearched.toLowerCase()) || u.lastname.toLowerCase().includes(userSearched.toLowerCase())
+    const matchesSearch = u.name.toLowerCase().includes(userSearch.toLowerCase()) || u.lastname.toLowerCase().includes(userSearch.toLowerCase())
     return matchesCategory && matchesSearch
   })
 
 
-  // CAPTURAR DATOS DE FORMULARIO CREACION DE USUARIO
-  const handleChange = (e) => {
+  // AUTOCOMPLETAR FORMULARIO DE DETALLE/EDICIÓN
+  const handleSelectUser = (selectedUser) => {
+    console.log(selectedUser)
+    const id = selectedUser.id || selectedUser._id || "";
+    setEditingId(id);
+    setFormData({
+      id: selectedUser.id || selectedUser._id || "",
+      name: selectedUser.name || "",
+      lastname: selectedUser.lastname || "",
+      dni: selectedUser.dni || "",
+      typeDocument: selectedUser.typeDocument?.trim().toUpperCase() || "",
+      email: selectedUser.email || "",
+      password: "",
+      phone: selectedUser.phone || "",
+      role: selectedUser.role?.trim().toUpperCase() || "",
+      nationality: selectedUser.nationality || "",
+      image: selectedUser.image || "",
+      active: selectedUser.active || 1,
+      birthdate: selectedUser.birthdate || "",
+    })
+  }
+
+  // HANDLERS PARA CAPTURAR DATOS INDEPENDIENTES
+  const handleChangeEdit = (e) => {
     const { name, value, type, checked } = e.target
     setFormData(prev => ({
       ...prev,
@@ -53,23 +104,124 @@ export const Users = () => {
     }))
   }
 
-  // ENVIAR DATOS DE FORMULARIO CREACION DE USUARIO
-  const handleSubmit = (e) => {
+  const handleChangeCreate = (e) => {
+    const { name, value, type, checked } = e.target
+    setCreateFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }))
+  }
+
+
+
+  // HANDLER UI POST - CREAR UN USUARIO
+  const handleSubmitCreate = async (e) => {
     e.preventDefault();
-    if (formData.typeDocument === "") {
-      alert("Selecione un tipo de documento de identidad")
+
+    if (createFormData.name === "" || createFormData.lastname === "") {
+      alert("Debes ingresar nombres y apellidos")
       return
     }
-    if (!formData.email.includes('@')) {
+    if (!createFormData.typeDocument || createFormData.typeDocument === "") {
+      alert("Seleccione un tipo de documento de identidad")
+      return
+    }
+    if (!createFormData.dni || createFormData.dni === "") {
+      alert("Debes ingresar número de documento de identidad")
+      return
+    }
+    if (!createFormData.email || !createFormData.email.includes('@')) {
       alert("Debes ingresar un correo válido")
       return
     }
-    if (formData.phoneNumber.length > 10 || formData.phoneNumber.length < 10) {
+    if (!createFormData.phone || createFormData.phone.length > 10 || createFormData.phone.length < 10) {
       alert("El número de teléfono debe tener 10 dígitos")
       return
     }
-    if (formData.nationality === "") {
-      alert("Selecione su país de orígen")
+    if (!createFormData.nationality || createFormData.nationality === "") {
+      alert("Seleccione su país de orígen")
+      return
+    }
+    if (!createFormData.role || createFormData.role === "Todos" || createFormData.role === "") {
+      alert("Seleccione un tipo de usuario")
+      return
+    }
+    const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+    if (!regex.test(createFormData.password)) {
+      alert("La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial");
+      return;
+    }
+    if (createFormData.password !== createFormData.confirmPassword) {
+      alert("Las contraseñas no coinciden")
+      return
+    }
+
+    try {
+      // Sanitizamos el objeto antes de enviarlo
+      const data = {
+        ...createFormData,
+        typeDocument: createFormData?.typeDocument?.toUpperCase(),
+        role: createFormData?.role?.toUpperCase(),
+        active: Boolean(createFormData.active),
+        birthdate: createFormData.birthdate ? new Date(createFormData.birthdate).toISOString() : null
+      }
+
+      await addUser(data);
+      setOpenModal(false)
+      alert(`Se ha creado el usuario "${createFormData.name} ${createFormData.lastname}" con éxito`);
+
+      setFormData({
+        name: "",
+        lastname: "",
+        dni: "",
+        typeDocument: "",
+        birthdate: "",
+        email: "",
+        phone: "",
+        nationality: "",
+        password: "",
+        confirmPassword: ""
+      })
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
+
+  // HANDLER UI PATCH - ACTUALIZAR UN USUARIO
+  const handleUpdate = async (e) => {
+
+    e.preventDefault();
+
+    if (!editingId) return alert("Selecciona un usuario de la lista para actualizar");
+
+    if (formData.name === "" || formData.lastname === "") {
+      alert("Debes ingresar nombres y apellidos")
+      return
+    }
+    if (!formData.typeDocument || formData.typeDocument === "") {
+      alert("Seleccione un tipo de documento de identidad")
+      return
+    }
+    if (!formData.dni || formData.dni === "") {
+      alert("Debes ingresar número de documento de identidad")
+      return
+    }
+    if (!formData.email || !formData.email.includes('@')) {
+      alert("Debes ingresar un correo válido")
+      return
+    }
+    if (formData.phone === "" || formData.phone.length > 10 || formData.phone.length < 10) {
+      alert("El número de teléfono debe tener 10 dígitos")
+      return
+    }
+    if (!formData.nationality || formData.nationality.trim() === "") {
+      alert("Seleccione su país de orígen")
+      return
+    }
+    if (!formData.role || formData.role === "TODOS" || formData.role === "") {
+      alert("Seleccione un tipo de usuario")
       return
     }
     const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
@@ -81,221 +233,124 @@ export const Users = () => {
       alert("Las contraseñas no coinciden")
       return
     }
-    const emptyFields = Object.entries(formData).some(([key, value]) => value === "")
-    if (emptyFields) {
-      alert("Hay campos vacíos")
-      return
+
+    try {
+      const data = {
+        ...formData,
+        typeDocument: formData?.typeDocument?.toUpperCase(),
+        role: formData?.role?.toUpperCase(),
+        active: Boolean(formData.active),
+        birthdate: formData.birthdate ? new Date(formData.birthdate).toISOString() : null
+      };
+
+      await editUser(editingId, data);
+
+      alert(`Se ha actualizado el usuario "${formData.name} ${formData.lastname}" con éxito`);
+
+      // Limpiar el detalle tras eliminar
+      setEditingId(null);
+      setFormData({
+        name: "",
+        lastname: "",
+        dni: "",
+        typeDocument: "",
+        birthdate: "",
+        email: "",
+        phone: "",
+        nationality: "",
+        password: "",
+        confirmPassword: ""
+      })
+
+    } catch (error) {
+      console.error(error);
     }
+  };
 
-    console.log(`El formulario enviado es: `, formData)
-    alert("Usuario creado correctamente: ", formData.name)
+  // HANDLER UI DELETE - ELIMINAR USUARIO
+  const handleDelete = async () => {
+    if (!formData.id) return alert("Selecciona un usuario de la lista para eliminar");;
+
+    try {
+      removeUser(formData.id)
+      alert(`Se ha eliminado el usuario "${formData.name}" con éxito`)
+      // Limpiar el detalle tras eliminar
+      setEditingId(null);
+      setFormData({
+        name: "",
+        lastname: "",
+        dni: "",
+        typeDocument: "",
+        birthdate: "",
+        email: "",
+        phone: "",
+        nationality: "",
+        password: "",
+        confirmPassword: ""
+      })
+
+      setOpenDeleteModal(false)
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
 
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-    }, 2000)
 
-    setFormData({
-      name: "",
-      lastname: "",
-      dni: "",
-      typeDocument: "",
-      birthdate: "",
-      email: "",
-      phoneNumber: "",
-      nationality: "",
-      password: "",
-      confirmPassword: "",
-      acceptedTerms: false
-    })
-
-  }
-
-  // ABRIR CALENDARIO CON CLICK EN ICONO
-  const dataRef = useRef(null)
-  const openCalendar = () => { dataRef.current.showPicker() }
 
   return (
     <div className="background">
       <div className="container">
         <div className="container-form">
           <h1>Usuarios</h1>
-          <form >
-            <fieldset className="form-flex">
-              <legend>Filtro</legend>
-              <Input
-                label="Buscar"
-                type="text"
-                placeholder=""
-                className="inputPrimary"
-                name="userName"
-                value={userSearched}
-                onChange={(e) => setUserSearched(e.target.value)}
-                required
-              />
 
-              <div className="divSearch">
-                <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
-              </div>
+          {/* Filtro */}
+          <UserFilters
+            userSearch={userSearch}
+            setUserSearch={setUserSearch}
+            userType={userType}
+            setUserType={setUserType}
+          />
 
-              <InputSelect
-                label="Filtrar por:"
-                type="text"
-                className="inputPrimary"
-                name="userType"
-                value={userType}
-                placeholder=""
-                onChange={(e) => setUserType(e.target.value)}
-                data={USERS_TYPE}
-              />
-
-            </fieldset>
-          </form>
           <div className="container-flex">
             {/* Modulo Usuarios */}
             <div className="module">
-              <UserItem users={usersFiltered} />
+              <UserItem users={usersFiltered} onSelectUser={handleSelectUser} />
             </div>
 
-            {/* Modulo Formulario Nuevo Usuario*/}
+
+            {/* Modulo Detalle Producto (EDICIÓN / PATCH) */}
             <div className="module">
-              {loading ? <Loader /> : (<form onSubmit={handleSubmit}>
-                <h2>Nuevo usuario</h2>
-                <fieldset>
-                  <legend>Datos</legend>
+              <Button className='btnAdd' text='+ Crear usuario' type='submit' onClick={() => setOpenModal(true)} />
 
-                  <div className={styles.displayForm}>
-                    <Input
-                      label="Nombres"
-                      type="text"
-                      placeholder=""
-                      className="inputPrimary"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                    />
-
-                    <Input
-                      label="Apellidos"
-                      type="text"
-                      placeholder=""
-                      className="inputPrimary"
-                      name="lastname"
-                      value={formData.lastname}
-                      onChange={handleChange}
-                      required
-                    />
-
-                    <Input
-                      label="N° de documento"
-                      type="text"
-                      placeholder=""
-                      className="inputPrimary"
-                      name="dni"
-                      value={formData.dni}
-                      onChange={handleChange}
-                      required
-                    />
-
-                    <InputSelect
-                      label="Tipo de documento"
-                      className="inputPrimary"
-                      name="typeDocument"
-                      value={formData.typeDocument}
-                      onChange={handleChange}
-                      data={DOCUMENTS_TYPE}
-                    />
-
-                    <div style={{ display: "flex" }}>
-                      <Input
-                        ref={dataRef}
-                        label="Fecha de Nacimiento"
-                        type="date"
-                        placeholder=""
-                        className="inputPrimary"
-                        name="birthdate"
-                        value={formData.birthdate}
-                        min="1936-04-26"
-                        max="2008-04-26"
-                        onChange={handleChange}
-                        required
-                      />
-                      <i className={`fa-regular fa-calendar-days ${styles.icon}`} onClick={openCalendar}
-                      ></i>
-                    </div>
-
-                    <Input
-                      label="Correo Electrónico"
-                      type="email"
-                      placeholder=""
-                      className="inputPrimary"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                    />
-
-                    <Input
-                      label="Teléfono"
-                      type="number"
-                      placeholder=""
-                      className="inputPrimary"
-                      name="phoneNumber"
-                      value={formData.phoneNumber}
-                      onChange={handleChange}
-                      required
-                    />
-
-                    <InputSelect
-                      label="País de nacimiento"
-                      className="inputPrimary"
-                      name="nationality"
-                      value={formData.nationality}
-                      onChange={handleChange}
-                      data={COUNTRIES}
-                    />
-
-                    <div style={{ display: "flex" }}>
-                      <Input
-                        label="Contraseña"
-                        type={!visible ? "password" : "text"}
-                        placeholder="**************"
-                        className="inputPrimary"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                      />
-                      <i className={`fa-solid fa-eye ${styles.icon}`}
-                        onClick={() => setVisible(!visible)}
-                      ></i>
-                    </div>
-
-                    <Input
-                      label="Confirme Contraseña"
-                      type={!visible ? "password" : "text"}
-                      placeholder="**************"
-                      className="inputPrimary"
-                      name="confirmPassword"
-                      value={formData.confirmPassword}
-                      onChange={handleChange}
-                      required
-                    />
-
-                    <div className={styles.divActionsOrder}>
-                      <Button text='Eliminar' className='btnDelete' />
-                      <Button text='Añadir' className='btnAdd' type='submit' />
-                    </div>
-
-                  </div>
-
-                </fieldset>
-              </form>)}
+              <UserEditForm
+                formData={formData}
+                handleChangeEdit={handleChangeEdit}
+                handleUpdate={handleUpdate}
+                setOpenDeleteModal={setOpenDeleteModal}
+              />
             </div>
-
           </div>
+
+          {/* Modal Creación de Producto (POST) */}
+          <UserCreateModal
+            openModal={openModal}
+            setOpenModal={setOpenModal}
+            createFormData={createFormData}
+            handleChangeCreate={handleChangeCreate}
+            handleSubmitCreate={handleSubmitCreate}
+            setCreateFormData={setCreateFormData}
+          />
+
+          {/* Modal de Confirmación de Eliminación */}
+          <UserDeleteModal
+            openDeleteModal={openDeleteModal}
+            setOpenDeleteModal={setOpenDeleteModal}
+            formData={formData}
+            handleDelete={handleDelete}
+          />
+
+          {loading && <Loader />}
 
         </div>
       </div>

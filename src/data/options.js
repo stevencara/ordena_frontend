@@ -1,8 +1,8 @@
 export const PLATES_TYPE = ["Todos", "Hamburguesas", "Pizzas", "Ensaladas", "Mexicana", "Japonesa", "Pastas", "Bebidas", "Saludable", "Carnes", "Postres", "Niños", "Acompañamientos", "Entradas", "Internacional"]
 
-export const DOCUMENTS_TYPE = ["Cedula de Ciudadanía", "Cedula de Extranjería", "Pasaporte", "NIT"]
+export const DOCUMENTS_TYPE = ["CEDULA DE CIUDADANIA", "CEDULA DE EXTRANJERIA", "PASAPORTE", "NIT"]
 
-export const USERS_TYPE = ["Todos", "Mesero", "Cocinero", "Administrador", "Cliente"]
+export const USERS_TYPE = ["TODOS", "MESERO", "COCINERO", "ADMINISTRADOR", "CLIENTE"]
 
 export const COUNTRIES = [
     'Afghanistan',
