@@ -64,7 +64,6 @@ export const Users = () => {
   });
 
 
-
   // Combinar filtro de categoría y el de búsqueda por nombre
   const usersFiltered = users.filter((u) => {
     const matchesCategory = userType === "Todos" || u.role.toLowerCase() === userType.toLowerCase();
@@ -95,7 +94,7 @@ export const Users = () => {
     })
   }
 
-  // HANDLERS PARA CAPTURAR DATOS INDEPENDIENTES
+  // HANDLERS PARA CAPTURAR DATOS INDEPENDIENTES EDITAR
   const handleChangeEdit = (e) => {
     const { name, value, type, checked } = e.target
     setFormData(prev => ({
@@ -104,6 +103,7 @@ export const Users = () => {
     }))
   }
 
+  // HANDLERS PARA CAPTURAR DATOS INDEPENDIENTES CREAR
   const handleChangeCreate = (e) => {
     const { name, value, type, checked } = e.target
     setCreateFormData(prev => ({
@@ -249,16 +249,19 @@ export const Users = () => {
 
       // Limpiar el detalle tras eliminar
       setEditingId(null);
-      setFormData({
+      setCreateFormData({
         name: "",
         lastname: "",
         dni: "",
         typeDocument: "",
-        birthdate: "",
         email: "",
-        phone: "",
-        nationality: "",
         password: "",
+        phone: "",
+        role: "",
+        nationality: "",
+        image: "",
+        active: true,
+        birthdate: "",
         confirmPassword: ""
       })
 
@@ -319,7 +322,7 @@ export const Users = () => {
             </div>
 
 
-            {/* Modulo Detalle Producto (EDICIÓN / PATCH) */}
+            {/* Modulo Detalle Usuario (EDICIÓN / PATCH) */}
             <div className="module">
               <Button className='btnAdd' text='+ Crear usuario' type='submit' onClick={() => setOpenModal(true)} />
 
@@ -332,7 +335,7 @@ export const Users = () => {
             </div>
           </div>
 
-          {/* Modal Creación de Producto (POST) */}
+          {/* Modal Creación de Usuario (POST) */}
           <UserCreateModal
             openModal={openModal}
             setOpenModal={setOpenModal}
