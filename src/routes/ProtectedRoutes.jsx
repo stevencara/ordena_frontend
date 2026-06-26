@@ -10,7 +10,7 @@ export const  ProtectedRoute = ({ children, allowedRoles}) => {
     }
 
     // Sin permisos
-    if(!allowedRoles.includes(user.rol)){
+    if(!allowedRoles.includes(user.role)){
         return(<h2>⛔ Acceso denegado</h2>)
     }
 

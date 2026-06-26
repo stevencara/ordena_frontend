@@ -5,20 +5,34 @@ import { Input, InputSelect } from '../../components/Input/Input'
 import { useState } from 'react'
 import { Loader } from '../../components/Loader/Loader'
 import { PLATES_TYPE } from '../../data/options'
+import { useAuth } from '../../hooks/useAuth'
+import { useOrders } from '../../hooks/useOrders'
+import { useProducts } from '../../hooks/useProducts'
+import { useTables } from '../../hooks/useTables'
+import { useOrderProducts } from '../../hooks/useOrderProducts'
 
 export const Orders = () => {
+  const { user } = useAuth()
+
+  const { currentOrder, createOrder } = useOrders()
+  const { products: apiProducts } = useProducts()
+  const { tables } = useTables()
+  const { orderDetails, loadOrderDetails, addProduct, deleteProduct} = useOrderProducts();
+
   const [loading, setLoading] = useState(false)
-  const [products, setProducts] = useState([])
   const [table, setTable] = useState("")
-  const [order, setOrder] = useState("")
   const [formData, setFormData] = useState({
-    typeProduct: "",
-    name: "",
-    quantity: 0,
+    category: "",
+    productId: "",
+    quantity: 1,
     description: "",
   })
 
-  // CAPTURAR DATOS DE FORMULARIO CREACION DE USUARIO
+  const filteredProducts = apiProducts.filter(
+    product => product.category === formData.category
+  )
+
+  // Capturar cambios del formulario
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
     setFormData(prev => ({
@@ -27,39 +41,94 @@ export const Orders = () => {
     }))
   }
 
-  // ENVIAR DATOS DE FORMULARIO CREACION DE USUARIO
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (formData.typeProduct === "") {
-      alert("Selecione un tipo de producto")
+  // Crear la orden
+  const handleCreateOrder = async () => {
+    if (!table) {
+      alert("Seleccione una mesa")
       return
     }
-    const emptyFields = Object.entries(formData).some(([key, value]) => value === "")
-    if (emptyFields) {
-      alert("Hay campos vacíos")
-      return
-    }
-    // console.log(`El formulario enviado es: `, formData)
-
-    const newProduct = { ...formData }
-    const updatedProducts = [...products, newProduct]
-    setProducts(updatedProducts)
 
     setLoading(true)
-    setTimeout(() => {
+    try {
+      const payload = {
+        table_number: Number(table),
+        client_id: 1,
+        user_id: user.id
+      }
+
+      const orderCreated = await createOrder(payload)
+      await loadOrderDetails(orderCreated.id)
+      alert(`Pedido #${orderCreated.id} creado`)
+
+    } catch (error) {
+      console.error(error)
+      alert("No fue posible crear el pedido")
+    } finally {
       setLoading(false)
-    }, 2000)
+    }
+  }
 
-    setFormData({
-      typeProduct: "",
-      name: "",
-      quantity: 0,
-      description: "",
-    })
 
+  // Agregar producto a la orden existente
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!currentOrder) {
+      alert("Primero debe crear el pedido")
+      return
+    }
+
+    if (!formData.productId) {
+      alert("Seleccione un platillo")
+      return
+    }
+
+    setLoading(true)
+
+    try {
+      await addProduct({
+        order_id: currentOrder.id,
+        product_id: Number(formData.productId),
+        quantity: Number(formData.quantity)
+      })
+
+      // Refrescar el detalle de la orden tras agregar
+      await loadOrderDetails(currentOrder.id)
+
+      // Limpiar solo los campos de producto, no la categoría
+      setFormData(prev => ({
+        ...prev,
+        productId: "",
+        quantity: 1,
+        description: ""
+      }))
+
+    } catch (error) {
+      console.error(error)
+      alert("No fue posible agregar el producto")
+    } finally {
+      setLoading(false)
+    }
 
   }
 
+
+  // Eliminar producto de la orden
+  const handleDeleteProduct = async (productId) => {
+    if (!currentOrder) return
+    console.log(productId)
+
+    setLoading(true)
+    try {
+      await deleteProduct(currentOrder.id, productId)
+      await loadOrderDetails(currentOrder.id)
+    } catch (error) {
+      console.error(error)
+      alert("No fue posible eliminar el producto")
+    } finally {
+      setLoading(false)
+    }
+  }
 
 
   return (
@@ -70,42 +139,47 @@ export const Orders = () => {
 
           <div className="container-flex">
             <div className="module">
-              {/* FORMULARIO DE BÚSQUEDA*/}
+
+              {/* SELECCIÓN DE MESA Y CREACIÓN DE ORDEN */}
               <form >
                 <fieldset className="form-flex">
                   <legend></legend>
 
-                  <Input
-                    label="N° de mesa"
-                    type="number"
+                  <InputSelect
+                    label="Mesa"
                     className="inputPrimary"
                     placeholder=""
-                    name="numberTable"
+                    name="table"
                     value={table}
                     onChange={(e) => setTable(e.target.value)}
-                    required
+                    data={tables
+                      .filter(table => table.state === 'LIBRE')
+                      .map(table => ({
+                        value: table.number,
+                        label: `Mesa ${table.number} (${table.capacity} personas)`
+                      }))
+                    }
                     variant='dark'
+                    required
                   />
 
-                  <Input
-                    label="N° de pedido"
-                    type="number"
-                    className="inputPrimary"
-                    placeholder=""
-                    name="numberOrder"
-                    value={order}
-                    onChange={(e) => setOrder(e.target.value)}
-                    required
-                    variant='dark'
+                  <Button
+                    text={currentOrder ? `Pedido #${currentOrder.id} activo` : "Crear pedido"}
+                    className="btnPrimary"
+                    type="button"
+                    onClick={handleCreateOrder}
+                    // Deshabilitar si ya hay una orden activa
+                    disabled={!!currentOrder}
                   />
 
-                  <div className="divSearch">
+                  {/*<div className="divSearch">
                     <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
-                  </div>
+                  </div> */}
+
                 </fieldset>
               </form>
 
-              {/* FORMULARIO DE NUEVA ORDEN*/}
+              {/* FORMULARIO PARA AGREGAR PRODUCTOS */}
               <form onSubmit={handleSubmit} >
                 <fieldset>
                   <h2>Añadí a tu pedido</h2>
@@ -113,26 +187,24 @@ export const Orders = () => {
 
                     <InputSelect
                       label="Tipo de comida"
-                      type="text"
                       className="inputPrimary"
-                      name="typeProduct"
-                      value={formData.typeProduct}
-                      placeholder=""
+                      name="category"
+                      value={formData.category}
                       onChange={handleChange}
                       data={PLATES_TYPE}
                     />
 
-                    <Input
+                    <InputSelect
                       label="Platillo"
-                      type="text"
-                      maxLength="50"
                       className="inputPrimary"
-                      placeholder="Elegí el platillo"
-                      name="name"
-                      value={formData.name}
+                      name="productId"
+                      value={formData.productId}
                       onChange={handleChange}
-                      required
                       variant='dark'
+                      data={filteredProducts.map(product => ({
+                        value: product.id,
+                        label: product.name
+                      }))}
                     />
 
                     <Input
@@ -141,7 +213,6 @@ export const Orders = () => {
                       min="1"
                       max="30"
                       className="inputPrimary"
-                      placeholder="Elegí el platillo"
                       name="quantity"
                       value={formData.quantity}
                       onChange={handleChange}
@@ -150,14 +221,13 @@ export const Orders = () => {
                     />
 
                     <Input
-                      label="Observación"
-                      type="0"
+                      label="Observación (opcional)"
+                      type="text"
                       className="inputPrimary"
-                      placeholder="Ingrese alguna nota relevante sobre el pedido..."
+                      placeholder="Ingrese alguna nota relevante..."
                       name="description"
                       value={formData.description}
                       onChange={handleChange}
-                      required
                       variant='dark'
                     />
 
@@ -175,9 +245,14 @@ export const Orders = () => {
               {loading && <Loader />}
             </div>
 
-            {/* MODULO DETALLE PEDIDO*/}
+            {/* DETALLE DEL PEDIDO */}
             <div className="module">
-              <CardOrder products={products} setProducts={setProducts} />
+              <CardOrder
+                orderDetails={orderDetails}
+                currentOrder={currentOrder}
+                handleCreateOrder={handleCreateOrder}
+                handleDeleteProduct={handleDeleteProduct}
+              />
             </div>
 
           </div>

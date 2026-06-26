@@ -1,6 +1,6 @@
 export const roleRoutes= {
-    admin: "/dashboard",
-    cocinero: "/view-orders",
-    mesero: "/orders",
-    cliente: "/index"
+    ADMINISTRADOR: "/dashboard",
+    COCINERO: "/view-orders",
+    MESERO: "/orders",
+    CLIENTE: "/index"
 }

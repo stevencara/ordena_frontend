@@ -8,6 +8,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { roleRoutes } from "../../utils/roleRoutes";
 import { Modal } from "../../components/Modal/Modal";
 
+
 export const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -34,122 +35,131 @@ export const Login = () => {
   }
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.email.includes('@')) {
       alert("Debes ingresar un correo válido")
       return
     }
 
-    const res = login(form.email, form.password)
+    setError("")
 
+    const res = await login(form.email, form.password)
+    console.log('Respuesta cruda del login:', res)
     if (!res.success) {
       setError(res.message)
       return
     }
 
-
-    console.log('El formulario fue enviado:', form)
     alert("Te has logueado exitosamente")
     setLoading(true)
-    const ruta = roleRoutes[res.user.rol]
-    setTimeout(() => {
-      setLoading(false)
-      navigate(ruta);
-    }, 2000)
-  }
+    console.log('Datos del usuario logueado:', res.user)
 
-  // FUNCIÓN PARA ENVIAR EL CORREO DE RECUPERACION
-  const handleSubmitEmailToRecoverCredencials = (e) => {
-    
-    e.preventDefault();
-    if (!email.includes('@')) {
-      alert("Debes ingresar un correo válido")
+    const userRole = res.user?.role || res.user?.rol;
+
+    const ruta = roleRoutes[res.user.role]
+
+    if (!ruta) {
+      console.error(`Error: No hay una ruta definida para el rol "${userRole}" en roleRoutes.`);
+      setLoading(false)
+      setError("Tu usuario no tiene una ruta asignada para su rol.")
       return
     }
+    setLoading(false)
+    navigate(ruta);
+  }
 
-    console.log("El correo a recuperar es: ", email)
-    alert("Se envió correo de recuperación a ", email)
-    setOpenModal(false);
-    setEmail("")
-  };
+    // FUNCIÓN PARA ENVIAR EL CORREO DE RECUPERACION
+    const handleSubmitEmailToRecoverCredencials = (e) => {
 
-  return (
-    <>
-      <div className="background">
-        <div className="container">
-          <div className="container-form">
+      e.preventDefault();
+      if (!email.includes('@')) {
+        alert("Debes ingresar un correo válido")
+        return
+      }
 
-            <h1>Iniciar Sesión</h1>
-            <fieldset>
-              <legend>Datos de usuario</legend>
-              <form action="" onSubmit={handleSubmit}>
-                <Input
-                  label="Correo Electrónico"
-                  name="email"
-                  type="email"
-                  placeholder="henan.c@gmail.com"
-                  className="inputPrimary"
-                  required
-                  value={form.email}
-                  onChange={handleChange}
-                />
+      console.log("El correo a recuperar es: ", email)
+      alert("Se envió correo de recuperación a ", email)
+      setOpenModal(false);
+      setEmail("")
+    };
 
-                <Input
-                  label="Contraseña"
-                  name="password"
-                  type="password"
-                  placeholder="**************"
-                  className="inputPrimary"
-                  required
-                  value={form.password}
-                  onChange={handleChange}
-                />
+    return (
+      <>
+        <div className="background">
+          <div className="container">
+            <div className="container-form">
 
-                {error && <p style={{
-                  color: "red",
-                  fontSize: "10px"
-                }}>{error}</p>}
+              <h1>Iniciar Sesión</h1>
+              <fieldset>
+                <legend>Datos de usuario</legend>
+                <form action="" onSubmit={handleSubmit}>
+                  <Input
+                    label="Correo Electrónico"
+                    name="email"
+                    type="email"
+                    placeholder="henan.c@gmail.com"
+                    className="inputPrimary"
+                    required
+                    value={form.email}
+                    onChange={handleChange}
+                  />
 
-                <Button text="Ingresar" type="submit" className="btnLogin" />
-                {loading && <Loader />}
-              </form>
-            </fieldset>
+                  <Input
+                    label="Contraseña"
+                    name="password"
+                    type="password"
+                    placeholder="**************"
+                    className="inputPrimary"
+                    required
+                    value={form.password}
+                    onChange={handleChange}
+                  />
 
-            <div className={styles.countOptions}>
-              <p className={styles.paragragh}><Link className={styles.link} onClick={() => setOpenModal(!openModal)}>Olvide mi contraseña</Link></p>
-              <p className={styles.paragragh}>¿No tienes cuenta? <span><Link to="/register" className={styles.link}>Regístrate</Link></span></p>
-            </div>
+                  {error && <p style={{
+                    color: "red",
+                    fontSize: "10px"
+                  }}>{error}</p>}
 
-            {/* Modal Recuperación de credenciales */}
-            <Modal isOpenModal={openModal} onCloseModal={() => setOpenModal(!openModal)} onAccept={() => { }} >
-              <div style={{ width: "100%", height: "100%", }}>
-                <h3 style={{ color: "black" }}>Recuperar contraseña</h3>
-                <fieldset>
-                  <legend>Datos de usuario</legend>
-                  <form action="" onSubmit={handleSubmitEmailToRecoverCredencials}>
-                    <Input
-                      label="Correo Electrónico"
-                      name="email"
-                      type="email"
-                      placeholder=""
-                      className=""
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      variant=""
-                    />
+                  <Button text="Ingresar" type="submit" className="btnLogin" />
+                  {loading && <Loader />}
+                </form>
+              </fieldset>
 
-                    <Button className='btnRegister' text='Solicitar recuperación' type="submit" />
-                  </form>
-                </fieldset>
+              <div className={styles.countOptions}>
+                <p className={styles.paragragh}><Link className={styles.link} onClick={() => setOpenModal(!openModal)}>Olvide mi contraseña</Link></p>
+                <p className={styles.paragragh}>¿No tienes cuenta? <span><Link to="/register" className={styles.link}>Regístrate</Link></span></p>
               </div>
-            </Modal>
 
+              {/* Modal Recuperación de credenciales */}
+              <Modal isOpenModal={openModal} onCloseModal={() => setOpenModal(!openModal)} onAccept={() => { }} >
+                <div style={{ width: "100%", height: "100%", }}>
+                  <h3 style={{ color: "black" }}>Recuperar contraseña</h3>
+                  <fieldset>
+                    <legend>Datos de usuario</legend>
+                    <form action="" onSubmit={handleSubmitEmailToRecoverCredencials}>
+                      <Input
+                        label="Correo Electrónico"
+                        name="email"
+                        type="email"
+                        placeholder=""
+                        className=""
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        variant=""
+                      />
+
+                      <Button className='btnRegister' text='Solicitar recuperación' type="submit" />
+                    </form>
+                  </fieldset>
+                </div>
+              </Modal>
+
+            </div>
           </div>
-        </div>
 
-      </div >
-    </>
-  )
-}
+        </div >
+      </>
+    )
+  }

@@ -1,34 +1,41 @@
 import styles from './CardOrder.module.css'
 import { Button } from '../../../components/Button/Button'
-import { Input } from '../../../components/Input/Input'
-import { useEffect } from 'react'
 
-export const CardOrder = ({ products, setProducts, orders=[] }) => {
+export const CardOrder = ({ orderDetails = [], currentOrder, handleCreateOrder, handleDeleteProduct }) => {
 
-  useEffect(() => {
-    // console.log("Productos se ha actualizado", products)
-  }, [products])
 
-  const totalResumen = products?.reduce((acc, product) => {
-    const price = product.price ? product.price : 50000
-    return acc + (price * product.quantity)
-  }, 0)
-
-  const deleteProduct = (indexToDelete) => {
-    const updatedProducts = products.filter(( _,index) => indexToDelete !== index)
-    setProducts(updatedProducts)
-  }
+  const totalResumen =
+    orderDetails?.reduce(
+      (acc, product) => acc + (Number(product.price) * product.quantity),
+      0
+    )
 
   return (
     <div className={styles.cardOrder}>
-      <h2 className={styles.cardTitle}>Mesa {orders.id} - Pedido #1053</h2>
-      <div className={styles.state}>Pendiente</div>
 
-      <label className={styles.labelCardItem}>Mesero: </label><span className={styles.spanCardItem}>Maria Isabel Perez</span>
+      {/* ENCABEZADO */}
+      <h2 className={styles.cardTitle}>
+        {currentOrder
+          ? `Mesa ${currentOrder.table_number} - Pedido #${currentOrder.id}`
+          : 'Pedido sin crear'}
+      </h2>
+
+      <div className={styles.state}>
+        {currentOrder?.state || 'SIN PEDIDO'}
+      </div>
+
+      <label className={styles.labelCardItem}>Mesero: </label>
+      <span className={styles.spanCardItem}>Maria Isabel Perez</span>
       <br />
-      <label className={styles.labelCardItem}>Fecha: </label><span className={styles.spanCardItem}>10/06/2025</span>
 
-      {/* Tabla Orden */}
+      <label className={styles.labelCardItem}>Fecha: </label>
+      <span className={styles.spanCardItem}> {
+        currentOrder?.created_at ?
+          new Date(currentOrder.created_at)
+            .toLocaleDateString() : '---'}
+      </span>
+
+      {/* TABLA DE PRODUCTOS */}
       <table className={styles.tableOrder}>
         <thead>
           <tr>
@@ -40,35 +47,63 @@ export const CardOrder = ({ products, setProducts, orders=[] }) => {
           </tr>
         </thead>
         <tbody>
-          {products?.map((product, index) => (
-            <tr key={index}>
-              <td>{product.name}</td>
-              <td>{product.quantity}</td>
-              <td>{product.price ? Number(product.price) : 50000}</td>
-              <td>{(product.price ? Number(product.price) : 50000) * (product.quantity)}</td>
-              <td><i className="fa-solid fa-trash-can" style={{color:"red"}}
-              onClick={() => deleteProduct(index) }></i></td>
-            </tr>
-          ))}
+          {orderDetails.length === 0
+            ? (
+              <tr>
+                <td colSpan="5" style={{ textAlign: 'center' }}>
+                  Sin productos agregados
+                </td>
+              </tr>
+            )
+            : orderDetails.map((product) => (
+              <tr key={product.product_id}>
+                <td>{product.name}</td>
+                <td>{product.quantity}</td>
+                <td>${Number(product.price).toLocaleString()}</td>
+                <td>${(Number(product.price) * product.quantity).toLocaleString()}</td>
+                <td>
+                  <i
+                    className="fa-solid fa-trash-can"
+                    style={{ color: "red", cursor: "pointer" }}
+                    onClick={() => handleDeleteProduct(product.product_id)}
+                  />
+                </td>
+              </tr>
+            ))
+          }
         </tbody>
         <tfoot>
           <tr>
             <td colSpan="3"><strong>Total</strong></td>
-            <td colSpan="1"><strong>$ {totalResumen}</strong></td>
+            <td colSpan="1"><strong>$ {totalResumen.toLocaleString()}</strong></td>
           </tr>
         </tfoot>
       </table>
 
-      <p>Observaciones</p>
-      <ul className={styles.description}>
-        {products?.map((product, index) => (
-          <li key={index}>{product.description}</li>
-        ))}
-      </ul>
+      {/* OBSERVACIONES: solo mostrar las que tengan descripción */}
+      {orderDetails.some(p => p.description) && (
+        <>
+          <p>Observaciones</p>
+          <ul className={styles.description}>
+            {orderDetails
+              .filter(p => p.description)
+              .map((product) => (
+                <li key={product.product_id}>
+                  <strong>{product.name}:</strong> {product.description}
+                </li>
+              ))}
+          </ul>
+        </>
+      )}
 
+      {/* ACCIONES */}
       <div className={styles.divActionsOrder}>
-        <Button className='btnDelete' text='Eliminar' />
-        <Button className='btnUpdate' text='Actualizar' />
+        <Button className='btnDelete' text='Eliminar pedido' />
+        <Button
+          className='btnUpdate'
+          text={currentOrder ? 'Actualizar' : 'Crear pedido'}
+          onClick={handleCreateOrder}
+        />
       </div>
 
     </div>

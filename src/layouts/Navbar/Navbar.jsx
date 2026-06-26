@@ -25,8 +25,8 @@ export const Navbar = () => {
 
         {user && (
           <div className={styles.userLogged}>
-            <h6 style={{ color: "white", textAlign: "center",  fontSize: "16px", margin:"0" }}>Bienvenido, {user.nombre}</h6>
-            <p style={{ color: "white", textAlign: "center", fontSize: "12px", margin:"0"  }}>Rol: {user.rol}</p>
+            <h6 style={{ color: "white", textAlign: "center",  fontSize: "16px", margin:"0" }}>Bienvenido, {user.name}</h6>
+            <p style={{ color: "white", textAlign: "center", fontSize: "12px", margin:"0"  }}>Rol: {user.role}</p>
           </div>
         )}
 

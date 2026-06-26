@@ -8,8 +8,8 @@ export const Input = forwardRef(({
   placeholder = "",
   name = "",
   value = "",
-  min="",
-  max="",
+  min = "",
+  max = "",
   maxLength,
   onChange,
   variant = "dark"
@@ -21,19 +21,19 @@ export const Input = forwardRef(({
     <div className={styles.inputContainer}>
       <label className={`${styles.label} ${labelStyle}`} htmlFor={label} >{label}
       </label>
-        <input
-          ref={ref}
-          type={type}
-          placeholder={placeholder}
-          className={`${styles.input} ${styles[className]}`}
-          name={name}
-          min={min}
-          max={max}
-          maxLength={maxLength}
-          value={value || ""}
-          onChange={onChange}
-          id={label}
-        />
+      <input
+        ref={ref}
+        type={type}
+        placeholder={placeholder}
+        className={`${styles.input} ${styles[className]}`}
+        name={name}
+        min={min}
+        max={max}
+        maxLength={maxLength}
+        value={value || ""}
+        onChange={onChange}
+        id={label}
+      />
     </div>
   )
 })
@@ -44,7 +44,7 @@ export const InputSelect = ({
   name,
   value,
   onChange,
-  data,
+  data = [],
   variant = "dark"
 }) => {
 
@@ -54,16 +54,32 @@ export const InputSelect = ({
     <div className={styles.inputContainer}>
       <label className={`${styles.label} ${labelStyle}`} htmlFor={label} >{label}
         <select
-           className={`${styles.input} ${styles[className]}`}
+          className={`${styles.input} ${styles[className]}`}
           name={name}
           value={value}
           onChange={onChange}
           id={label}
         >
           <option value="">Seleccione una opción</option>
-          {data.map((d, index) => (
-            <option key={index} value={d}>{d}</option>
-          ))}
+          {data.map((d, index) => {
+
+            const option =
+              typeof d === "string"
+                ? {
+                  value: d,
+                  label: d
+                }
+                : d
+
+            return (
+              <option
+                key={index}
+                value={option.value}
+              >
+                {option.label}
+              </option>
+            )
+          })}
 
         </select>
       </label>

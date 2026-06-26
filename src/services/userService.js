@@ -63,3 +63,4 @@ export const deleteUser = async (id) => {
     throw new Error("Error eliminando usuario");
   }
 }
+

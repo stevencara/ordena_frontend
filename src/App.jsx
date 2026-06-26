@@ -35,28 +35,28 @@ function App() {
         <Route path="/" element={<AdminLayout />}>
 
           <Route path="dashboard" element={
-            <ProtectedRoute allowedRoles={["admin"]}>
+            <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
               <Dashboard />
             </ProtectedRoute>
           }
           />
 
           <Route path="orders" element={
-            <ProtectedRoute allowedRoles={["admin", "cocinero", "mesero"]}>
+            <ProtectedRoute allowedRoles={["ADMINISTRADOR", "COCINERO", "MESERO"]}>
               <Orders />
             </ProtectedRoute>
           }
           />
 
           <Route path="users" element={
-            <ProtectedRoute allowedRoles={["admin"]}>
+            <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
               <Users />
             </ProtectedRoute>
           }
           />
 
           <Route path="products" element={
-            <ProtectedRoute allowedRoles={["admin", "cocinero", "mesero"]}>
+            <ProtectedRoute allowedRoles={["ADMINISTRADOR", "COCINERO", "MESERO"]}>
               <Products />
             </ProtectedRoute>
           }
@@ -64,7 +64,7 @@ function App() {
 
 
           <Route path="view-orders" element={
-            <ProtectedRoute allowedRoles={["admin", "cocinero", "mesero"]}>
+            <ProtectedRoute allowedRoles={["ADMINISTRADOR", "COCINERO", "MESERO"]}>
               <ViewOrders />
             </ProtectedRoute>
           }
