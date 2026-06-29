@@ -90,7 +90,7 @@ export const Products = () => {
 
 
   // HANDLER UI POST - CREAR UN PRODUCTO
-  const handleSubmitCreate = async (e) => {
+  const handleCreate = async (e) => {
     e.preventDefault();
 
     if (!createFormData.name || createFormData.name === "") {
@@ -129,6 +129,7 @@ export const Products = () => {
         image: ""
       })
 
+      return true;
     } catch (error) {
       console.error(error);
     }
@@ -162,7 +163,7 @@ const handleUpdate = async (e) => {
       description: "",
       image: ""
     })
-
+    return true;
   } catch (error) {
     console.error(error);
   }
@@ -234,7 +235,7 @@ return (
           setOpenModal={setOpenModal}
           createFormData={createFormData}
           handleChangeCreate={handleChangeCreate}
-          handleSubmitCreate={handleSubmitCreate}
+          handleCreate={handleCreate}
           setCreateFormData={setCreateFormData}
         />
 

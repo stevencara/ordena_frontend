@@ -63,3 +63,22 @@ export const deleteProduct = async (id) => {
     throw new Error("Error eliminando un producto");
   }
 }
+
+
+// Servicio para subir imagen a Cloudinary vía backend y retorna la URL pública
+export const uploadProductImage = async (file) => {
+  const formData = new FormData()
+  formData.append('image', file)
+
+  const response = await fetch(`${API_URL}/products/upload-image`, {
+    method: 'POST',
+    // Sin Content-Type, fetch lo gestiona solo con el boundary correcto
+    body: formData
+  })
+
+  if (!response.ok) {
+    throw new Error('Error subiendo la imagen')
+  }
+
+  return response.json() // retorna ejemplo: { imageUrl: "https://res.cloudinary.com/..." }
+}

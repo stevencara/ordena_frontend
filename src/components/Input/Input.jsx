@@ -12,7 +12,8 @@ export const Input = forwardRef(({
   max = "",
   maxLength,
   onChange,
-  variant = "dark"
+  variant = "dark",
+  disabled = false
 }, ref) => {
 
   const labelStyle = variant === "dark" ? styles.labelLight : styles.labelDark;
@@ -33,6 +34,7 @@ export const Input = forwardRef(({
         value={value || ""}
         onChange={onChange}
         id={label}
+        disabled={disabled}
       />
     </div>
   )

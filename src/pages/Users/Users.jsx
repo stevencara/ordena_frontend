@@ -113,9 +113,8 @@ export const Users = () => {
   }
 
 
-
   // HANDLER UI POST - CREAR UN USUARIO
-  const handleSubmitCreate = async (e) => {
+  const handleCreate = async (e) => {
     e.preventDefault();
 
     if (createFormData.name === "" || createFormData.lastname === "") {
@@ -182,6 +181,8 @@ export const Users = () => {
         password: "",
         confirmPassword: ""
       })
+
+      return true;
     } catch (error) {
       console.error(error);
     }
@@ -264,7 +265,7 @@ export const Users = () => {
         birthdate: "",
         confirmPassword: ""
       })
-
+      return true;
     } catch (error) {
       console.error(error);
     }
@@ -341,7 +342,7 @@ export const Users = () => {
             setOpenModal={setOpenModal}
             createFormData={createFormData}
             handleChangeCreate={handleChangeCreate}
-            handleSubmitCreate={handleSubmitCreate}
+            handleCreate={handleCreate}
             setCreateFormData={setCreateFormData}
           />
 

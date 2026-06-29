@@ -64,3 +64,22 @@ export const deleteUser = async (id) => {
   }
 }
 
+
+
+// Servicio para subir imagen a Cloudinary vía backend y retorna la URL pública
+export const uploadUserImage = async (file) => {
+  const formData = new FormData()
+  formData.append('image', file)
+
+  const response = await fetch(`${API_URL}/users/upload-image`, {
+    method: 'POST',
+    // Sin Content-Type, fetch lo gestiona solo con el boundary correcto
+    body: formData
+  })
+
+  if (!response.ok) {
+    throw new Error('Error subiendo la imagen')
+  }
+
+  return response.json() // retorna ejemplo: { imageUrl: "https://res.cloudinary.com/..." }
+}

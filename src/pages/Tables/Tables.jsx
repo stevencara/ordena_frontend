@@ -232,6 +232,7 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
               value={formData.number}
               onChange={handleChangeEdit}
               className="inputPrimary"
+              disabled={editingId}
             />
 
             <Input
